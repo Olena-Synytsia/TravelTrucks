@@ -1,0 +1,9 @@
+.headerWrap {
+  width: 1440px;
+  height: 72px;
+  display: flex;
+  background-color: #f7f7f7;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}

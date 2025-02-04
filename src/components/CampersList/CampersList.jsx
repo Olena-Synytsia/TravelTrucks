@@ -24,24 +24,33 @@ const CamperList = () => {
   const [currentItems, setCurrentItems] = useState([]);
   const [itemsPerPage] = useState(4);
   const [hasMore, setHasMore] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1); // Стан для поточної сторінки
 
   useEffect(() => {
     console.log("Dispatching fetchCampers...");
-    dispatch(fetchCampers({ page: 1, itemsPerPage: 4 }));
-  }, [dispatch]);
+    dispatch(fetchCampers({ page: currentPage, itemsPerPage }));
+  }, [dispatch, currentPage, itemsPerPage]); // Викликаємо запит при зміні сторінки
 
   useEffect(() => {
     if (campers && campers.length > 0) {
-      setCurrentItems(campers.slice(0, itemsPerPage));
+      setCurrentItems((prevItems) => {
+        // Перевірка, щоб не додавати дублікати
+        const newItems = campers.filter(
+          (camper) => !prevItems.some((item) => item.id === camper.id)
+        );
+        return [...prevItems, ...newItems];
+      });
+
+      // Якщо елементів менше, ніж необхідно, значить це остання сторінка
+      if (campers.length < itemsPerPage) {
+        setHasMore(false);
+      }
     }
   }, [campers, itemsPerPage]);
 
   const loadMoreItems = () => {
-    const nextPage = Math.ceil(currentItems.length / itemsPerPage) + 1;
-    const nextItems = campers.slice(0, nextPage * itemsPerPage);
-    setCurrentItems(nextItems);
-    if (nextItems.length >= campers.length) {
-      setHasMore(false);
+    if (hasMore) {
+      setCurrentPage((prevPage) => prevPage + 1);
     }
   };
 
@@ -59,12 +68,8 @@ const CamperList = () => {
     window.open(`/catalog/${camper.id}`, "_blank");
   };
 
-  // Рендер іконок з об'єкта iconsCreateData
   const renderIcons = (camper) => {
-    // Порядок іконок
     const filteredKeys = ["transmission", "engine", "kitchen", "AC"];
-
-    // Перевіряємо наявність іконок
     return filteredKeys.map((key) => {
       const { icon: Icon, label, condition } = iconsCreateData[key];
 
@@ -82,8 +87,8 @@ const CamperList = () => {
 
   return (
     <div className={s.container}>
-      {currentItems.map((camper) => (
-        <div key={camper.id} className={s.camperListCard}>
+      {currentItems.map((camper, index) => (
+        <div key={`${camper.id}-${index}`} className={s.camperListCard}>
           <div className={s.gallery}>
             {camper.gallery && camper.gallery.length > 0 && (
               <img
@@ -155,7 +160,6 @@ const CamperList = () => {
 
             <p className={s.camperDescription}>{camper.description}</p>
 
-            {/* Рендерим іконки за допомогою renderIcons */}
             <div className={s.iconsContainer}>{renderIcons(camper)}</div>
 
             <button type="button" onClick={() => handleClick(camper)}>

@@ -1,0 +1,112 @@
+.container {
+}
+
+.camperListCard {
+  display: flex;
+  flex-direction: row;
+  width: 888px;
+  height: auto;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 20px;
+  border: 1px solid #dadde1;
+}
+
+.gallery {
+  margin-right: 24px;
+}
+
+.img {
+  width: 292px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.campersCardInfo {
+  width: 524px;
+  height: 320px;
+  gap: 24px;
+}
+
+.camperName {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #101828;
+}
+
+.campersListInfoEl1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.camperPrice {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #101828;
+}
+
+.campersListInfoEl2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.campersListInfoEl3 {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.camperRating {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.text {
+  color: #101828;
+}
+
+.camperDescription {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #101828;
+}
+
+.iconLocation {
+  width: 16px;
+  height: 16px;
+}
+
+.iconStarYellow {
+  fill: #ffc531;
+}
+.iconStarWhite {
+  fill: #f2f4f7;
+}
+
+.loadMoreBtn {
+  border: 1px solid #dadde1;
+  color: #101828;
+  background-color: #f2f4f7;
+}
+
+.loadMoreBtn:hover,
+.loadMoreBtn:focus {
+  background-color: #f2f4f7;
+  outline: 1px solid #d84343;
+}

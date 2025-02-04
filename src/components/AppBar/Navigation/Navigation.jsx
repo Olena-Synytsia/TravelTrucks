@@ -5,8 +5,6 @@ import s from "./Navigation.module.css";
 const Navigation = () => {
   const location = useLocation();
 
-  console.log(location.pathname);
-
   const isDetailsPage = location.pathname.includes("/catalog/");
 
   const buildLinkClass = ({ isActive }) => {

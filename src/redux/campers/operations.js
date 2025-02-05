@@ -23,14 +23,11 @@ export const fetchCampers = createAsyncThunk(
 
       // Перевірка, що відповідь успішна
       if (response.status === 200) {
-        console.log("Response status:", response.status);
-        console.log("Data from API:", response.data);
         return response.data;
       }
 
       throw new Error("Server returned an error");
     } catch (error) {
-      console.error("Error fetching campers:", error.message);
       return rejectWithValue(error.message); // Відправка помилки в redux
     }
   }
@@ -42,9 +39,11 @@ export const fetchCamperCardById = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await baseMockapi.get(`/campers/${id}`);
+      if (!response.data) {
+        throw new Error("No data received for the camper.");
+      }
       return response.data;
     } catch (error) {
-      console.error("Error fetching camper by ID:", error.message);
       return rejectWithValue(error.message);
     }
   }

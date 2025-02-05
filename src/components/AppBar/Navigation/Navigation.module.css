@@ -21,9 +21,3 @@
 .activeLink {
   color: #d84343;
 }
-
-.disabledLink {
-  color: #a9a9a9; /* колір для неактивного посилання */
-  pointer-events: none;
-  cursor: not-allowed;
-}

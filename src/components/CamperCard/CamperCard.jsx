@@ -1,33 +1,42 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { IoMapOutline } from "react-icons/io5";
-import { BsFillStarFill } from "react-icons/bs";
 import { fetchCamperCardById } from "../../redux/campers/operations.js";
+import {
+  selectCamper,
+  selectLoading,
+  selectError,
+} from "../../redux/campers/selectors.js";
+import { BsFillStarFill } from "react-icons/bs";
+import { IoMapOutline } from "react-icons/io5";
 import Loader from "../../components/Loader/Loader.jsx";
 import s from "./CamperCard.module.css";
 
 const CamperCard = ({ camperId }) => {
   const dispatch = useDispatch();
 
-  const camper = useSelector((state) => state.campers.camper);
-  const loading = useSelector((state) => state.campers.loading);
-  const error = useSelector((state) => state.campers.error);
+  const camper = useSelector(selectCamper);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
+    if (!camperId) {
+      return;
+    }
     dispatch(fetchCamperCardById(camperId));
   }, [dispatch, camperId]);
 
   if (loading) return <Loader />;
   if (error) return <div>{error}</div>;
+  if (!camper) return <div>No camper data available.</div>;
 
   return (
     <div className={s.container}>
       {camper && (
         <div key={camper.id}>
-          <div className={s.camperCardEl}>
+          <div className={s.camperInfoWrapOne}>
             <h3 className={s.camperName}>{camper.name}</h3>
-            <div className={s.camperCardEl2}>
-              <p className={s.camperRating}>
+            <ul className={s.campersInfoWrapTwo}>
+              <li className={s.camperRating}>
                 <BsFillStarFill
                   style={{
                     fill: camper.rating > 0 ? "#ffc531" : "#f2f4f7",
@@ -38,8 +47,8 @@ const CamperCard = ({ camperId }) => {
                 <span>
                   <span> ({camper.reviews.length} Reviews)</span>
                 </span>
-              </p>
-              <p className={s.camperLocation}>
+              </li>
+              <li className={s.camperLocation}>
                 <IoMapOutline className={s.iconLocation} />
                 {camper.location ? (
                   <>
@@ -49,8 +58,8 @@ const CamperCard = ({ camperId }) => {
                 ) : (
                   "Location not available"
                 )}
-              </p>
-            </div>
+              </li>
+            </ul>
 
             <p className={s.camperPrice}>&euro; {camper.price}.00 </p>
           </div>
@@ -61,7 +70,7 @@ const CamperCard = ({ camperId }) => {
                   key={index}
                   src={image.thumb}
                   alt={`Thumbnail ${index + 1}`}
-                  className={s.thumbnail}
+                  className={s.gallery}
                 />
               ))}
             </div>

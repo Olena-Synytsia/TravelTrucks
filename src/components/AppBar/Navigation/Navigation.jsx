@@ -5,14 +5,10 @@ import s from "./Navigation.module.css";
 const Navigation = () => {
   const location = useLocation();
 
-  const isDetailsPage = location.pathname.includes("/catalog/");
+  const isDetailsPage = location.pathname.includes("/details");
 
   const buildLinkClass = ({ isActive }) => {
-    return clsx(
-      s.link,
-      isActive && s.activeLink,
-      isDetailsPage && s.disabledLink
-    ); // Додаємо клас disabledLink, якщо на сторінці деталей
+    return clsx(s.link, isActive && !isDetailsPage && s.activeLink);
   };
 
   return (

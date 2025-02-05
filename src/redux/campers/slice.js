@@ -41,6 +41,8 @@ const campersSlice = createSlice({
           state.hasMore = false; // Якщо сервер повернув менше елементів, ніж вказано в limit
         }
         state.campers = [...state.campers, ...action.payload.items];
+
+        state.currentPage += 1; // оновлюємо сторінку для наступного запиту
       })
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;

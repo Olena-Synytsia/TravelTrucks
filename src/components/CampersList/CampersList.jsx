@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoMapOutline } from "react-icons/io5";
 import { BsFillStarFill, BsSuitHeart } from "react-icons/bs";
 import { fetchCampers } from "../../redux/campers/operations.js";
-import { toggleFavorite } from "../../redux/campers/slice.js";
+import { toggleFavorite, setHasMore } from "../../redux/campers/slice.js"; // import setHasMore
 import Loader from "../../components/Loader/Loader.jsx";
 import s from "./CampersList.module.css";
 import iconsCreateData from "../iconsCreateData/iconsCreateData.jsx";
@@ -12,24 +12,27 @@ import {
   selectSelectedCampers,
   selectLoading,
   selectError,
+  selectHasMore, // Додано вибір для hasMore
 } from "../../redux/campers/selectors.js";
+import { useNavigate } from "react-router-dom";
 
 const CamperList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const campers = useSelector(selectCampers);
   const selectedCampers = useSelector(selectSelectedCampers);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const hasMore = useSelector(selectHasMore); // Використовуємо глобальний hasMore з Redux
 
   const [currentItems, setCurrentItems] = useState([]);
   const [itemsPerPage] = useState(4);
-  const [hasMore, setHasMore] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1); // Стан для поточної сторінки
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     console.log("Dispatching fetchCampers...");
     dispatch(fetchCampers({ page: currentPage, itemsPerPage }));
-  }, [dispatch, currentPage, itemsPerPage]); // Викликаємо запит при зміні сторінки
+  }, [dispatch, currentPage, itemsPerPage]);
 
   useEffect(() => {
     if (campers && campers.length > 0) {
@@ -41,16 +44,18 @@ const CamperList = () => {
         return [...prevItems, ...newItems];
       });
 
-      // Якщо елементів менше, ніж необхідно, значить це остання сторінка
+      // Оновлюємо hasMore після отримання нових даних
       if (campers.length < itemsPerPage) {
-        setHasMore(false);
+        dispatch(setHasMore(false)); // Оновлюємо глобальний стан hasMore в Redux
       }
     }
-  }, [campers, itemsPerPage]);
+  }, [campers, itemsPerPage, dispatch]);
 
   const loadMoreItems = () => {
     if (hasMore) {
       setCurrentPage((prevPage) => prevPage + 1);
+      // Замість setCurrentItems, використовуємо dispatch для додавання нових кемперів
+      dispatch(fetchCampers({ page: currentPage + 1, itemsPerPage }));
     }
   };
 
@@ -65,7 +70,7 @@ const CamperList = () => {
   };
 
   const handleClick = (camper) => {
-    window.open(`/catalog/${camper.id}`, "_blank");
+    navigate(`/catalog/${camper.id}`);
   };
 
   const renderIcons = (camper) => {

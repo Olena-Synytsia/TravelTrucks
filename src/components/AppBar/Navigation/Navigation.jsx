@@ -5,10 +5,15 @@ import s from "./Navigation.module.css";
 const Navigation = () => {
   const location = useLocation();
 
-  const isDetailsPage = location.pathname.includes("/details");
+  const isDetailsPage = location.pathname.includes("/catalog/");
 
   const buildLinkClass = ({ isActive }) => {
-    return clsx(s.link, isActive && !isDetailsPage && s.activeLink);
+    if (isDetailsPage) {
+      return s.link;
+    }
+
+    // Для інших сторінок додаємо активний стиль, якщо посилання активне
+    return clsx(s.link, isActive && s.activeLink);
   };
 
   return (

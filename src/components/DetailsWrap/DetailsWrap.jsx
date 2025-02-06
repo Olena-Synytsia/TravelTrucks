@@ -1,4 +1,4 @@
-import CamperCard from "../CamperCard/CamperCard.jsx";
+import CamperCard from "./CamperCard/CamperCard.jsx";
 import { useParams } from "react-router-dom";
 
 const CamperDetails = () => {

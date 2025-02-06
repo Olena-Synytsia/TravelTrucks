@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchCamperCardById } from "../../redux/campers/operations.js";
+import { fetchCamperCardById } from "../../../redux/campers/operations.js";
 import {
   selectCamper,
   selectLoading,
   selectError,
-} from "../../redux/campers/selectors.js";
+} from "../../../redux/campers/selectors.js";
 import { BsFillStarFill } from "react-icons/bs";
 import { IoMapOutline } from "react-icons/io5";
-import Loader from "../../components/Loader/Loader.jsx";
+import Loader from "../../Loader/Loader.jsx";
 import s from "./CamperCard.module.css";
 
 const CamperCard = ({ camperId }) => {

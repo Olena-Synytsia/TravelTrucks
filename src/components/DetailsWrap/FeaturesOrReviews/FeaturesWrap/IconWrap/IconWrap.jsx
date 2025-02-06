@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCamperCardById } from "../../../../../redux/campers/operations.js";
 import { useParams } from "react-router-dom";
+import { fetchCamperCardById } from "../../../../../redux/campers/operations.js";
 import {
   selectLoading,
   selectError,

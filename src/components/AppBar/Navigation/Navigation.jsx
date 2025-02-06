@@ -11,8 +11,6 @@ const Navigation = () => {
     if (isDetailsPage) {
       return s.link;
     }
-
-    // Для інших сторінок додаємо активний стиль, якщо посилання активне
     return clsx(s.link, isActive && s.activeLink);
   };
 

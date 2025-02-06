@@ -1,11 +1,11 @@
-import CamperList from "../../components/CampersList/CampersList.jsx";
+import CatalogWrap from "../../components/CatalogWrap/CatalogWrap";
 
-import s from "./CatalogPage.module.css";
+// import s from "./CatalogPage.module.css";
 
 const CatalogPage = () => {
   return (
     <div className="section">
-      <CamperList />
+      <CatalogWrap />
     </div>
   );
 };

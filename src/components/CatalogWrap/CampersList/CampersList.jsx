@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchCampers } from "../../../redux/campers/operations.js";
-import { toggleFavorite, setHasMore } from "../../../redux/campers/slice.js"; // import setHasMore
-import Loader from "../../Loader/Loader.jsx";
-import s from "./CampersList.module.css";
-import CamperInfo from "../CamperInfo/CamperInfo.jsx"; // Імпортуємо компонент CamperInfo
-import iconsCreateData from "../../iconsCreateData/iconsCreateData.jsx";
+import { toggleFavorite, setHasMore } from "../../../redux/campers/slice.js";
 import {
   selectCampers,
   selectSelectedCampers,
@@ -13,11 +10,15 @@ import {
   selectError,
   selectHasMore,
 } from "../../../redux/campers/selectors.js";
-import { useNavigate } from "react-router-dom";
+import Loader from "../../Loader/Loader.jsx";
+import CamperInfo from "../CamperInfo/CamperInfo.jsx";
+import iconsCreateData from "../../iconsCreateData/iconsCreateData.jsx";
+import s from "./CampersList.module.css";
 
 const CamperList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const campers = useSelector(selectCampers);
   const selectedCampers = useSelector(selectSelectedCampers);
   const loading = useSelector(selectLoading);

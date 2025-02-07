@@ -11,15 +11,12 @@ import s from "./VehicleDetailsWrap.module.css";
 
 const VehicleDetailsWrap = ({ camper }) => {
   const { id } = useParams();
-  console.log("CFMPER", camper);
-  console.log(id);
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   useEffect(() => {
     if (id) {
-      console.log("FCGBID", id);
       dispatch(fetchCamperCardById(id));
     }
   }, [dispatch, id]);

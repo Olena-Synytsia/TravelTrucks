@@ -37,19 +37,22 @@
 }
 
 .formLi {
+  position: relative;
   height: 60px;
   border: none;
 }
 
-/* .label {
+.inputWrap {
+  position: absolute;
 }
 
-.span {
-} */
-
 .error {
-  font-weight: 500;
-  font-size: 12px;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 28px;
+  right: 18px;
+  font-size: 16px;
+  font-weight: 400;
   color: #e44848;
 }
 
@@ -72,8 +75,22 @@ input::placeholder {
   color: #6c717b;
 }
 
+.textarea {
+  height: 118px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 16px;
+}
+
 .formLi:last-child .input {
   height: 118px;
+  padding-top: 18px;
+}
+
+.textarea::placeholder {
+  text-align: left;
+  color: #6c717b;
+  opacity: 1;
 }
 
 .input:focus {

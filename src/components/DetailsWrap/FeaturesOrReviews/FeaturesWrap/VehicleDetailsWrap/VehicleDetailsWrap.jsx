@@ -41,6 +41,7 @@ const VehicleDetailsWrap = ({ camper }) => {
   return (
     <>
       <h3 className={s.title}>VehicleDetailsWrap</h3>
+      <hr className={s.hr} />
       <ul className={s.vehicleDetail}>
         <li className={s.vehicleDetailLi}>
           <p className={s.text}>

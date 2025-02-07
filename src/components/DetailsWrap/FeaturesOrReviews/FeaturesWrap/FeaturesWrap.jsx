@@ -18,6 +18,7 @@ const FeaturesWrap = () => {
   return (
     <div className={s.container}>
       <IconWrap camper={camper} />
+
       <VehicleDetailsWrap camper={camper} />
     </div>
   );

@@ -13,12 +13,24 @@
   position: relative;
 }
 
-.active {
+.link {
+  color: #101828;
+}
+
+.link:hover,
+.link:active,
+.activeLink:hover,
+.activeLink:active {
+  color: #101828;
+}
+
+.activeLink {
+  color: #101828;
   cursor: pointer;
   position: relative;
 }
 
-.title .active::after {
+.activeLink::after {
   content: "";
   position: absolute;
   bottom: -27px;
@@ -33,6 +45,7 @@
 
 .hr {
   border: 1px solid #dadde1;
+  margin-top: 0;
   margin-bottom: 44px;
 }
 

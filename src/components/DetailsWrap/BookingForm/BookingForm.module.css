@@ -83,8 +83,10 @@ input::placeholder {
 }
 
 .formLi:last-child .input {
+  width: 527px;
   height: 118px;
   padding-top: 18px;
+  resize: none;
 }
 
 .textarea::placeholder {

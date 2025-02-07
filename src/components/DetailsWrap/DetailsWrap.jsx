@@ -1,7 +1,8 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CamperCard from "./CamperCard/CamperCard.jsx";
+import clsx from "clsx";
 import ReviewsWrapper from "../DetailsWrap/FeaturesOrReviews/ReviewsWrap/ReviewsWrap.jsx";
 import FeaturesWrap from "../DetailsWrap/FeaturesOrReviews/FeaturesWrap/FeaturesWrap.jsx";
 import BookingForm from "./BookingForm/BookingForm.jsx";
@@ -9,8 +10,7 @@ import BookingForm from "./BookingForm/BookingForm.jsx";
 import s from "./DetailsWrap.module.css";
 
 const DetailsWrap = () => {
-  const { id } = useParams(); // отримуємо id з URL
-  const navigate = useNavigate();
+  const { id, tab } = useParams();
 
   const camper = useSelector((state) =>
     state.campers.camper && state.campers.camper.id === id
@@ -18,30 +18,26 @@ const DetailsWrap = () => {
       : null
   );
 
-  const [activeTab, setActiveTab] = useState("features");
+  const [activeTab, setActiveTab] = useState(tab || "features");
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
+  useEffect(() => {
+    setActiveTab(tab || "features");
+  }, [tab]);
 
-    navigate(`?tab=${tab}`);
+  const buildLinkClass = ({ isActive }) => {
+    return clsx(s.link, isActive && s.activeLink);
   };
 
   return (
     <div className="section">
       <CamperCard camperId={id} />
       <div className={s.title}>
-        <div
-          onClick={() => handleTabClick("features")}
-          className={activeTab === "features" ? s.active : ""}
-        >
+        <NavLink to={`/catalog/${id}/features`} className={buildLinkClass}>
           Features
-        </div>
-        <div
-          onClick={() => handleTabClick("reviews")}
-          className={activeTab === "reviews" ? s.active : ""}
-        >
+        </NavLink>
+        <NavLink to={`/catalog/${id}/reviews`} className={buildLinkClass}>
           Reviews
-        </div>
+        </NavLink>
       </div>
 
       <hr className={s.hr} />
@@ -59,7 +55,7 @@ const DetailsWrap = () => {
             />
           )}
         </div>
-        <BookingForm />
+        <BookingForm className={s.bookingForm} />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import {
   selectLoading,
   selectError,
 } from "../../../../../redux/campers/selectors.js";
+import Loader from "../../../../Loader/Loader.jsx";
 import s from "./VehicleDetailsWrap.module.css";
 
 const VehicleDetailsWrap = ({ camper }) => {
@@ -24,7 +25,7 @@ const VehicleDetailsWrap = ({ camper }) => {
   }, [dispatch, id]);
 
   // Якщо дані ще не завантажені
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
 
   // Якщо сталася помилка
   if (error) return <div>Error: {error}</div>;
@@ -36,24 +37,51 @@ const VehicleDetailsWrap = ({ camper }) => {
     return str
       .replace(/([a-z])([A-Z])/g, "$1 $2")
       .toLowerCase()
-      .replace(/^./, (char) => char.toUpperCase());
+      .replace(/^./, (char) => char.toUpperCase())
+      .replace(/([0-9])([a-zA-Z])/g, "$1 $2");
   };
 
   return (
-    <div className={s.container}>
-      <div>VehicleDetailsWrap</div>
+    <>
+      <h3 className={s.title}>VehicleDetailsWrap</h3>
       <ul className={s.vehicleDetail}>
-        <li></li>
-        {camper.form && <li>{capitalizeWords(`Form ${camper.form}`)}</li>}
-        {camper.length && <li>{capitalizeWords(`Length ${camper.length}`)}</li>}
-        {camper.width && <li>{capitalizeWords(`Width ${camper.width}`)}</li>}
-        {camper.height && <li>{capitalizeWords(`Height ${camper.height}`)}</li>}
-        {camper.tank && <li>{capitalizeWords(`Tank ${camper.tank}`)}</li>}
-        {camper.consumption && (
-          <li>{capitalizeWords(`Consumption ${camper.consumption}`)}</li>
-        )}
+        <li className={s.vehicleDetailLi}>
+          <p className={s.text}>
+            Form<span>{capitalizeWords(camper.form)}</span>
+          </p>
+        </li>
+
+        <li className={s.vehicleDetailLi}>
+          <p className={s.text}>
+            Length<span>{capitalizeWords(camper.length)}</span>
+          </p>
+        </li>
+
+        <li className={s.vehicleDetailLi}>
+          <p className={s.text}>
+            Width<span>{capitalizeWords(camper.width)}</span>
+          </p>
+        </li>
+
+        <li className={s.vehicleDetailLi}>
+          <p className={s.text}>
+            Height<span>{capitalizeWords(camper.height)}</span>
+          </p>
+        </li>
+
+        <li className={s.vehicleDetailLi}>
+          <p className={s.text}>
+            Tank<span>{capitalizeWords(camper.tank)}</span>
+          </p>
+        </li>
+
+        <li className={s.vehicleDetailLi}>
+          <p className={s.text}>
+            Consumption<span>{capitalizeWords(camper.consumption)}</span>
+          </p>
+        </li>
       </ul>
-    </div>
+    </>
   );
 };
 

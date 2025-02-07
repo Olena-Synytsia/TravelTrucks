@@ -1,7 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+// Імпорт компонента DatePicker
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import * as Yup from "yup";
 import s from "./BookingForm.module.css";
 
@@ -43,67 +45,76 @@ const BookingForm = () => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <Form className={s.form}>
-          <ul className={s.formUl}>
-            <li className={s.formLi}>
-              <div className={s.inputWrap}>
-                <Field name="name" className={s.input} placeholder="Name*" />
-                <ErrorMessage
-                  name="name"
-                  component="span"
-                  className={s.error}
-                />
-              </div>
-            </li>
+        {({ setFieldValue, values }) => (
+          <Form className={s.form}>
+            <ul className={s.formUl}>
+              <li className={s.formLi}>
+                <div className={s.inputWrap}>
+                  <Field name="name" className={s.input} placeholder="Name*" />
+                  <ErrorMessage
+                    name="name"
+                    component="span"
+                    className={s.error}
+                  />
+                </div>
+              </li>
 
-            <li className={s.formLi}>
-              <div className={s.inputWrap}>
-                <Field name="email" className={s.input} placeholder="Email*" />
-                <ErrorMessage
-                  name="email"
-                  component="span"
-                  className={s.error}
-                />
-              </div>
-            </li>
+              <li className={s.formLi}>
+                <div className={s.inputWrap}>
+                  <Field
+                    name="email"
+                    className={s.input}
+                    placeholder="Email*"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="span"
+                    className={s.error}
+                  />
+                </div>
+              </li>
 
-            <li className={s.formLi}>
-              <div className={s.inputWrap}>
-                <Field
-                  name="bookingDate"
-                  className={s.input}
-                  placeholder="Booking date*"
-                />
-                <ErrorMessage
-                  name="bookingDate"
-                  component="span"
-                  className={s.error}
-                />
-              </div>
-            </li>
+              {/* Поле дати з DatePicker */}
+              <li className={s.formLi}>
+                <div className={s.inputWrap}>
+                  <DatePicker
+                    selected={values.bookingDate} // вибір дати
+                    onChange={(date) => setFieldValue("bookingDate", date)} // оновлення значення дати
+                    className={s.input}
+                    placeholderText="Booking date*" // підказка для користувача
+                    dateFormat="dd/MM/yyyy" // формат дати
+                  />
+                  <ErrorMessage
+                    name="bookingDate"
+                    component="span"
+                    className={s.error}
+                  />
+                </div>
+              </li>
 
-            <li className={s.formLi}>
-              <div className={s.inputWrap}>
-                <Field
-                  name="comment"
-                  as="textarea"
-                  className={s.input}
-                  placeholder="Comment"
-                />
-                <ErrorMessage
-                  name="comment"
-                  component="span"
-                  className={s.error}
-                />
-              </div>
-            </li>
-          </ul>
+              <li className={s.formLi}>
+                <div className={s.inputWrap}>
+                  <Field
+                    name="comment"
+                    as="textarea"
+                    className={s.input}
+                    placeholder="Comment"
+                  />
+                  <ErrorMessage
+                    name="comment"
+                    component="span"
+                    className={s.error}
+                  />
+                </div>
+              </li>
+            </ul>
 
-          <button type="submit" className={s.btn}>
-            Send
-          </button>
-          <ToastContainer />
-        </Form>
+            <button type="submit" className={s.btn}>
+              Send
+            </button>
+            <ToastContainer />
+          </Form>
+        )}
       </Formik>
     </div>
   );

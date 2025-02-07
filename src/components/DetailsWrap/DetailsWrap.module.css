@@ -35,3 +35,9 @@
   border: 1px solid #dadde1;
   margin-bottom: 44px;
 }
+
+.infoWrap {
+  display: flex;
+  direction: row;
+  gap: 40px;
+}

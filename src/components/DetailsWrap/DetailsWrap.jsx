@@ -4,6 +4,7 @@ import { useState } from "react";
 import CamperCard from "./CamperCard/CamperCard.jsx";
 import ReviewsWrapper from "../DetailsWrap/FeaturesOrReviews/ReviewsWrap/ReviewsWrap.jsx";
 import FeaturesWrap from "../DetailsWrap/FeaturesOrReviews/FeaturesWrap/FeaturesWrap.jsx";
+import BookingForm from "./BookingForm/BookingForm.jsx";
 
 import s from "./DetailsWrap.module.css";
 
@@ -45,16 +46,21 @@ const DetailsWrap = () => {
 
       <hr className={s.hr} />
 
-      {activeTab === "features" && (
-        <FeaturesWrap className={s.featuresContainer} camper={camper} />
-      )}
-      {activeTab === "reviews" && camper && (
-        <ReviewsWrapper
-          reviews={camper.reviews}
-          className={s.reviewsContainer}
-          camper={camper}
-        />
-      )}
+      <div className={s.infoWrap}>
+        <div>
+          {activeTab === "features" && (
+            <FeaturesWrap className={s.featuresContainer} camper={camper} />
+          )}
+          {activeTab === "reviews" && camper && (
+            <ReviewsWrapper
+              reviews={camper.reviews}
+              className={s.reviewsContainer}
+              camper={camper}
+            />
+          )}
+        </div>
+        <BookingForm />
+      </div>
     </div>
   );
 };

@@ -1,0 +1,82 @@
+.container {
+  width: 639px;
+  height: 588px;
+  padding: 44px 57px;
+  border-radius: 10px;
+  border: 1px solid #dadde1;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-bottom: 8px;
+}
+
+.text {
+  color: #6c717b;
+  margin-bottom: 24px;
+}
+
+.form {
+  width: 527px;
+  height: 420px;
+  text-align: center;
+}
+
+.formUl {
+  width: 527px;
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.formLi {
+  height: 60px;
+  border: none;
+}
+
+/* .label {
+}
+
+.span {
+} */
+
+.error {
+  font-weight: 500;
+  font-size: 12px;
+  color: #e44848;
+}
+
+.input {
+  width: 527px;
+  height: 60px;
+  border: none;
+  background-color: #f7f7f7;
+  padding: 18px;
+  border-radius: 12px;
+}
+
+input::placeholder {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #6c717b;
+}
+
+.formLi:last-child .input {
+  height: 118px;
+}
+
+.input:focus {
+  box-shadow: none;
+  outline: none;
+}

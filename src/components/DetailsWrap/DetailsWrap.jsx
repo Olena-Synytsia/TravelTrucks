@@ -1,4 +1,4 @@
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import CamperCard from "./CamperCard/CamperCard.jsx";
@@ -11,6 +11,7 @@ import s from "./DetailsWrap.module.css";
 
 const DetailsWrap = () => {
   const { id, tab } = useParams();
+  const navigate = useNavigate();
 
   const camper = useSelector((state) =>
     state.campers.camper && state.campers.camper.id === id
@@ -18,10 +19,18 @@ const DetailsWrap = () => {
       : null
   );
 
+  useEffect(() => {
+    if (!tab) {
+      navigate(`/catalog/${id}/features`, { replace: true }); // Автоматичний редирект на features
+    }
+  }, [id, tab, navigate]);
+
   const [activeTab, setActiveTab] = useState(tab || "features");
 
   useEffect(() => {
-    setActiveTab(tab || "features");
+    if (tab) {
+      setActiveTab(tab); // Якщо в URL є параметр tab, оновлюємо activeTab
+    }
   }, [tab]);
 
   const buildLinkClass = ({ isActive }) => {

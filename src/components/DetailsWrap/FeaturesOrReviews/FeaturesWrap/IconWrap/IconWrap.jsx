@@ -31,13 +31,6 @@ const IconWrap = ({ camper }) => {
   // Якщо camper ще не завантажено (значення undefined)
   if (!camper) return <div>Camper not found</div>;
 
-  const capitalizeWords = (str) => {
-    return str
-      .replace(/([a-z])([A-Z])/g, "$1 $2")
-      .toLowerCase()
-      .replace(/^./, (char) => char.toUpperCase());
-  };
-
   return (
     <ul className={s.featuresIconWrap}>
       {Object.keys(iconsCreateData).map((featureKey) => {
@@ -52,7 +45,7 @@ const IconWrap = ({ camper }) => {
           <li key={featureKey} className={s.featuresIcon}>
             <Icon className={s.icon} />
             {/* Рендеримо іконку */}
-            <span className={s.title}>{capitalizeWords(label)}</span>
+            <span className={s.title}>{label}</span>
             {/* Виводимо текст для цієї іконки */}
           </li>
         );

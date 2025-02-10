@@ -1,10 +1,12 @@
 .featuresIconWrap {
   width: 527px;
+  height: 104px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 100px;
+  overflow-y: auto;
 }
 
 .featuresIcon {

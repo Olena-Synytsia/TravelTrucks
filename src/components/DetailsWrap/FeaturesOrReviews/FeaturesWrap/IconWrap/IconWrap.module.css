@@ -21,7 +21,9 @@
 .icon {
   width: 20px;
   height: 20px;
+  padding-right: 2px;
 }
+
 .title {
   font-size: 16px;
   font-weight: 500;

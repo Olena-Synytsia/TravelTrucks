@@ -27,15 +27,21 @@ const DetailsWrap = () => {
 
   const [activeTab, setActiveTab] = useState(tab || "features");
 
+  const buildLinkClass = ({ isActive }) => {
+    return clsx(s.link, isActive && s.activeLink);
+  };
+
   useEffect(() => {
     if (tab) {
       setActiveTab(tab); // Якщо в URL є параметр tab, оновлюємо activeTab
     }
   }, [tab]);
 
-  const buildLinkClass = ({ isActive }) => {
-    return clsx(s.link, isActive && s.activeLink);
-  };
+  useEffect(() => {
+    if (!tab) {
+      navigate(`/catalog/${id}/features`, { replace: true }); // Автоматичний редирект на features
+    }
+  }, [id, tab, navigate]);
 
   return (
     <div className="section">

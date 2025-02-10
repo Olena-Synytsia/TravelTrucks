@@ -10,7 +10,7 @@ const ReviewsWrapper = ({ reviews }) => {
     <div className={s.container}>
       {reviews.map((review, index) => (
         <div key={index} className={s.reviewCard}>
-          <div className={s.reviewCardEl1}>
+          <div className={s.reviewCardEl}>
             <div className={s.reviewerIcon}>
               {review.reviewer_name[0].toUpperCase()}
             </div>

@@ -11,9 +11,10 @@
   padding: 10px;
 }
 
-.reviewCardEl1 {
+.reviewCardEl {
   display: flex;
   flex-direction: row;
+  margin-bottom: 24px;
 }
 
 .reviewerIcon {

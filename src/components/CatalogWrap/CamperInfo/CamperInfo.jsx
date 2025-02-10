@@ -8,7 +8,7 @@ const CamperInfo = ({ camper, handleFavoriteClick, selectedCampers }) => {
       <div className={s.camperInfoWrapOne}>
         <h3 className={s.camperName}>{camper.name}</h3>
         <ul className={s.camperInfoPrice}>
-          <li className={s.camperPrice}>&euro; {camper.price}.00 </li>
+          <li className={s.camperPrice}>&euro; {camper.price.toFixed(2)}</li>
           <li>
             <span
               className={s.iconHeart}

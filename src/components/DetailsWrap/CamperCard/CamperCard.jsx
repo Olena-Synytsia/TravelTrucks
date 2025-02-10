@@ -61,7 +61,7 @@ const CamperCard = ({ camperId }) => {
               </li>
             </ul>
 
-            <p className={s.camperPrice}>&euro; {camper.price}.00 </p>
+            <p className={s.camperPrice}>&euro; {camper.price.toFixed(2)}</p>
           </div>
           {camper.gallery && camper.gallery.length > 0 && (
             <div className={s.galleryContainer}>

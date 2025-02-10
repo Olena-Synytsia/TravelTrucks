@@ -1,8 +1,43 @@
 .container {
+  width: 360px;
+  height: 88px;
   margin-bottom: 40px;
 }
 
-.text {
+.label {
+  display: flex;
+  flex-direction: column;
   color: #6c717b;
   padding-bottom: 8px;
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  padding-right: 2px;
+  color: #6c717b;
+}
+
+.input {
+  width: 100%;
+  height: 56px;
+  padding: 16px 20px;
+  padding-left: 42px;
+  border-radius: 12px;
+  border: none;
+  background-color: #f7f7f7;
+}
+
+.input::placeholder {
+  color: #6c717b;
 }

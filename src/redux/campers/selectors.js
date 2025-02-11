@@ -7,3 +7,5 @@ export const selectLoading = (state) => state.campers.loading; // Стан за�
 export const selectError = (state) => state.campers.error; // Помилка
 export const selectHasMore = (state) => state.campers.hasMore; // Перевірка, чи є ще кемпери
 export const selectCurrentPage = (state) => state.campers.currentPage; // Збереження поточної сторінки
+export const selectFilters = (state) => state.campers.filters; // Збереження фільтрації
+export const selectLocation = (state) => state.campers.filters.location;

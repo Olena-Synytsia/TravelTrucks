@@ -12,14 +12,44 @@ export const baseMockapi = axios.create({
 // Запит для отримання кемперів з пагінацією
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
-  async ({ page, itemsPerPage }, { rejectWithValue }) => {
+  async ({ page, itemsPerPage }, { rejectWithValue, getState }) => {
     try {
-      const response = await baseMockapi.get("/campers", {
-        params: {
-          page,
-          limit: itemsPerPage, // Параметри пагінації
-        },
-      });
+      // Отримуємо фільтри з Redux store
+      const { filters } = getState().campers;
+
+      // Формуємо params для запиту
+      const params = {
+        page,
+        limit: itemsPerPage, // Параметри пагінації
+      };
+
+      // Додаємо фільтри тільки якщо вони задані
+      if (filters.location && filters.location.trim()) {
+        params.location = encodeURIComponent(filters.location.trim());
+      }
+      if (filters.form && filters.form.trim()) {
+        params.form = filters.form.trim();
+      }
+      if (filters.transmission === "automatic") {
+        params.transmission = filters.transmission;
+      }
+      if (filters.AC === true) {
+        params.AC = filters.AC;
+      }
+      if (filters.bathroom === true) {
+        params.bathroom = filters.bathroom;
+      }
+      if (filters.kitchen === true) {
+        params.kitchen = filters.kitchen;
+      }
+      if (filters.TV === true) {
+        params.TV = filters.TV;
+      }
+
+      console.log("Request Params:", params);
+
+      // Відправляємо запит
+      const response = await baseMockapi.get("/campers", { params });
 
       // Перевірка, що відповідь успішна
       if (response.status === 200) {

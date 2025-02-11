@@ -1,7 +1,22 @@
+import { useDispatch, useSelector } from "react-redux";
 import { IoMapOutline } from "react-icons/io5";
+import { setFilters } from "../../../redux/campers/slice.js";
+import { selectLocation } from "../../../redux/campers/selectors.js";
+
 import s from "./LocationFilter.module.css";
 
 const LocationFilter = () => {
+  const dispatch = useDispatch();
+  const location = useSelector(selectLocation);
+
+  const handleLocationChange = (event) => {
+    dispatch(
+      setFilters({
+        location: event.target.value, // оновлюємо лише location
+      })
+    );
+  };
+
   return (
     <div className={s.container}>
       <label className={s.label}>Location</label>
@@ -11,9 +26,9 @@ const LocationFilter = () => {
         <input
           type="text"
           className={s.input}
-          // onChange={handleChange}
+          value={location} // щоб значення input було прив'язане до стану
+          onChange={handleLocationChange} // використовуємо правильний обробник
           placeholder="Enter location"
-          // value={location}
         />
       </div>
     </div>

@@ -4,6 +4,15 @@ import { fetchCampers, fetchCamperCardById } from "./operations.js";
 const campersSlice = createSlice({
   name: "campers",
   initialState: {
+    filters: {
+      location: "",
+      form: "",
+      transmission: "",
+      AC: false,
+      bathroom: false,
+      kitchen: false,
+      TV: false,
+    }, // параметри фільтрації
     campers: [], // список всіх кемперів
     camper: null, // інформація про один кемпер
     currentPage: 1, // поточна сторінка
@@ -14,6 +23,13 @@ const campersSlice = createSlice({
     hasMore: true, // чи є ще елементи для завантаження
   },
   reducers: {
+    setCampers(state, action) {
+      state.campers = action.payload;
+    },
+    // Перемикання фільтрів
+    setFilters: (state, action) => {
+      state.filters = { ...state.filters, ...action.payload };
+    },
     toggleFavorite: (state, action) => {
       const id = action.payload;
       state.selectedCampers[id] = !state.selectedCampers[id]; // Перемикаємо стан обраності
@@ -63,7 +79,7 @@ const campersSlice = createSlice({
   },
 });
 
-export const { toggleFavorite, setPage, resetCampers, setHasMore } =
+export const { setFilters, toggleFavorite, setPage, resetCampers, setHasMore } =
   campersSlice.actions;
 
 export const campersReducers = campersSlice.reducer;

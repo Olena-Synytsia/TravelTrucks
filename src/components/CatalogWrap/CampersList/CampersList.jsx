@@ -9,6 +9,7 @@ import {
   selectLoading,
   selectError,
   selectHasMore,
+  selectFilters,
 } from "../../../redux/campers/selectors.js";
 import Loader from "../../Loader/Loader.jsx";
 import CamperInfo from "../CamperInfo/CamperInfo.jsx";
@@ -24,14 +25,15 @@ const CamperList = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const hasMore = useSelector(selectHasMore); // Використовуємо глобальний hasMore з Redux
+  const filters = useSelector(selectFilters); // Отримуємо фільтри з Redux
 
   const [currentItems, setCurrentItems] = useState([]);
   const [itemsPerPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    dispatch(fetchCampers({ page: currentPage, itemsPerPage }));
-  }, [dispatch, currentPage, itemsPerPage]);
+    dispatch(fetchCampers({ page: currentPage, itemsPerPage, filters }));
+  }, [dispatch, currentPage, itemsPerPage, filters]);
 
   useEffect(() => {
     if (campers && campers.length > 0) {

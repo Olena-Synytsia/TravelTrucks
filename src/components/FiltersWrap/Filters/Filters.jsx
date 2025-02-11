@@ -1,6 +1,6 @@
 import LocationFilter from "../LocationFilter/LocationFilter.jsx";
 import VehicleEquipmentFilter from "../VehicleEquipmentFilter/VehicleEquipmentFilter.jsx";
-import VehicleTypeWrap from "../VehicleTypeWrap/VehicleTypeWrap.jsx";
+import VehicleTypeFilter from "../VehicleTypeFilter/VehicleTypeFilter.jsx";
 
 import s from "./Filters.module.css";
 
@@ -10,7 +10,7 @@ const Filters = () => {
       <LocationFilter />
       <p className={s.text}>Filters</p>
       <VehicleEquipmentFilter />
-      <VehicleTypeWrap />
+      <VehicleTypeFilter />
       <button type="button">Search</button>
     </div>
   );

@@ -1,0 +1,54 @@
+.container {
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  padding-bottom: 24px;
+}
+
+.hr {
+  border: 1px solid #dadde1;
+  margin-bottom: 24px;
+  margin-top: 0;
+}
+
+.iconList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 8px;
+}
+
+.iconWrap {
+  display: flex;
+  flex-direction: column;
+  width: 112px;
+  height: 98px;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid #dadde1;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+span.icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.5%;
+  text-align: center;
+}

@@ -21,7 +21,7 @@ const VehicleEquipmentFilter = () => {
 
   return (
     <div className={s.container}>
-      <h3 className={s.text}>Vehicle equipment</h3>
+      <h3 className={s.title}>Vehicle equipment</h3>
       <hr className={s.hr} />
       <ul className={s.iconList}>{renderIcons()}</ul>
     </div>

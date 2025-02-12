@@ -35,16 +35,20 @@ const VehicleTypeFilter = () => {
       <h3 className={s.title}>Vehicle type</h3>
       <hr className={s.hr} />
       <ul className={s.iconList}>
-        {formLabels.map((item) => (
-          <li
-            key={item.label}
-            className={s.iconWrap}
-            onClick={() => handleVehicleTypeChange(item.label)}
-          >
-            <span className={s.icon}>{item.icon}</span>
-            <span className={s.label}>{labelReplacement[item.label]}</span>
-          </li>
-        ))}
+        {formLabels.map((item) => {
+          const isActive = form.form === item.label; // Перевірка на активний фільтр
+
+          return (
+            <li
+              key={item.label}
+              className={isActive ? `${s.iconWrap} ${s.active}` : s.iconWrap}
+              onClick={() => handleVehicleTypeChange(item.label)}
+            >
+              <span className={s.icon}>{item.icon}</span>
+              <span className={s.label}>{labelReplacement[item.label]}</span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

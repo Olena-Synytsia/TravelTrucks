@@ -45,6 +45,10 @@
   border: 1px solid #e44848;
 }
 
+.iconWrap.active {
+  border: 1px solid #e44848;
+}
+
 span.icon svg {
   width: 32px;
   height: 32px;

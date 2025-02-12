@@ -28,7 +28,7 @@ const campersSlice = createSlice({
     },
     // Перемикання фільтрів
     setFilters: (state, action) => {
-      state.filters = { ...state.filters, ...action.payload };
+      state.filters = { ...action.payload };
     },
     toggleFavorite: (state, action) => {
       const id = action.payload;

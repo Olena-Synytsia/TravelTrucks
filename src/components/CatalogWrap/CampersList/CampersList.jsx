@@ -87,9 +87,6 @@ const CamperList = () => {
     navigate(`/catalog/${camper.id}`);
   };
 
-  console.log("Filters:", filters); // У функції fetchCampers
-  console.log("Fetched Campers:", campers); // У компоненті CamperList
-
   return (
     <div className={s.container}>
       {currentItems.map((camper, index) => (

@@ -1,20 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
 import { IoMapOutline } from "react-icons/io5";
-import { setFilters } from "../../../redux/campers/slice.js";
-import { selectLocation } from "../../../redux/campers/selectors.js";
-
 import s from "./LocationFilter.module.css";
 
-const LocationFilter = () => {
-  const dispatch = useDispatch();
-  const location = useSelector(selectLocation);
-
+const LocationFilter = ({ location, setLocation }) => {
   const handleLocationChange = (event) => {
-    dispatch(
-      setFilters({
-        location: event.target.value, // оновлюємо лише location
-      })
-    );
+    setLocation(event.target.value); // Локально оновлюємо стан
   };
 
   return (

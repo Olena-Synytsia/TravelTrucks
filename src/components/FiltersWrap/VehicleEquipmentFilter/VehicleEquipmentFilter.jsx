@@ -1,17 +1,46 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFilters } from "../../../redux/campers/selectors.js";
+import { setFilters } from "../../../redux/campers/slice.js";
 import iconsCreateData from "../../iconsCreateData/iconsCreateData.jsx";
 import s from "./VehicleEquipmentFilter.module.css";
 
 const VehicleEquipmentFilter = () => {
+  const dispatch = useDispatch();
+  const filters = useSelector(selectFilters);
   const [activeFilters, setActiveFilters] = useState([]);
 
+  // Оновлення глобальних фільтрів у Redux тільки після зміни activeFilters
+  useEffect(() => {
+    if (activeFilters.length > 0 || filters.length > 0) {
+      dispatch(
+        setFilters({
+          ...activeFilters.reduce((acc, filter) => {
+            // Додаємо фільтри для AC, Kitchen, Bathroom, TV і т. д.
+            if (filter === "Automatic") {
+              acc.transmission = "automatic"; // Якщо вибрано "Automatic", оновлюємо transmission
+            } else if (filter === "Bathroom") {
+              acc.bathroom = true; // Оновлюємо фільтр для bathroom
+            } else if (filter === "Kitchen") {
+              acc.kitchen = true; // Оновлюємо фільтр для kitchen
+            } else {
+              acc[filter] = true; // Додаємо фільтр для інших
+            }
+            return acc;
+          }, {}),
+        })
+      );
+    }
+  }, [activeFilters, dispatch, filters.length]); // Оновлюємо глобальний стан при зміні activeFilters
+
   const toggleFilter = (label) => {
-    setActiveFilters((prev) =>
-      prev.includes(label)
+    setActiveFilters((prev) => {
+      const newFilters = prev.includes(label)
         ? prev.filter((item) => item !== label)
-        : [...prev, label]
-    );
+        : [...prev, label];
+
+      return newFilters;
+    });
   };
 
   const filterOrder = ["AC", "transmission", "kitchen", "TV", "bathroom"];

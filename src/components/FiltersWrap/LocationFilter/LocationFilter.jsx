@@ -15,8 +15,8 @@ const LocationFilter = ({ location, setLocation }) => {
         <input
           type="text"
           className={s.input}
-          value={location} // щоб значення input було прив'язане до стану
-          onChange={handleLocationChange} // використовуємо правильний обробник
+          value={location}
+          onChange={handleLocationChange}
           placeholder="Enter location"
         />
       </div>

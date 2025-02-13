@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setFilters } from "../../../redux/campers/slice.js";
-// import { selectFilters } from "../../../redux/campers/selectors.js";
+import { resetCampers } from "../../../redux/campers/slice.js";
 import LocationFilter from "../LocationFilter/LocationFilter.jsx";
 import VehicleEquipmentFilter from "../VehicleEquipmentFilter/VehicleEquipmentFilter.jsx";
 import VehicleTypeFilter from "../VehicleTypeFilter/VehicleTypeFilter.jsx";
@@ -10,7 +10,6 @@ import s from "./Filters.module.css";
 
 const Filters = () => {
   const dispatch = useDispatch();
-  // const filters = useSelector(selectFilters);
 
   // Локальні стани для фільтрів
   const [location, setLocation] = useState("");
@@ -18,9 +17,10 @@ const Filters = () => {
   const [vehicleType, setVehicleType] = useState("");
 
   const handleSearchClick = () => {
+    dispatch(resetCampers());
     // Перетворюємо локальні фільтри в потрібний формат для глобального стану
     const filters = {
-      location, // Місце
+      location,
       form: vehicleType || "", // Замість vehicleType передаємо form (це значення буде зберігатись в бд як form)
       transmission: vehicleEquipment.includes("Automatic") ? "automatic" : "",
       AC: vehicleEquipment.includes("AC"),
@@ -30,7 +30,11 @@ const Filters = () => {
     };
 
     // Відправляємо фільтри у Redux
-    dispatch(setFilters({ filters }));
+    dispatch(setFilters(filters));
+
+    setLocation("");
+    setVehicleEquipment([]);
+    setVehicleType("");
   };
 
   return (

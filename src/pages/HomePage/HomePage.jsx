@@ -11,9 +11,9 @@ export const HomePage = () => {
   return (
     <div className={s.background}>
       <div className="section">
-        <div className={s.homePageWrap}>
-          <h1 className={s.homePageTitle}>Campers of your dreams</h1>
-          <p className={s.homePageText}>
+        <div className={s.container}>
+          <h1 className={s.title}>Campers of your dreams</h1>
+          <p className={s.text}>
             You can find everything you want in our catalog
           </p>
           <button type="button" className={s.homePageBtn} onClick={handleClick}>

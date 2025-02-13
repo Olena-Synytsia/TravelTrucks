@@ -40,6 +40,7 @@ const campersSlice = createSlice({
     resetCampers: (state) => {
       state.campers = []; // Очищаємо список кемперів
       state.currentPage = 1; // Скидаємо поточну сторінку на 1
+      state.hasMore = true; // Перезавантаження наявності більше елементів
     },
     setHasMore: (state, action) => {
       state.hasMore = action.payload; // Оновлення стану hasMore

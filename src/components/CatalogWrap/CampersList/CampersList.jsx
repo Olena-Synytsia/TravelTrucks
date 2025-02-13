@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchCampers } from "../../../redux/campers/operations.js";
-import { toggleFavorite, setHasMore } from "../../../redux/campers/slice.js";
+import {
+  resetCampers,
+  toggleFavorite,
+  setHasMore,
+} from "../../../redux/campers/slice.js";
+
 import {
   selectCampers,
   selectSelectedCampers,
@@ -32,6 +37,7 @@ const CamperList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    dispatch(resetCampers());
     dispatch(fetchCampers({ page: currentPage, itemsPerPage, filters }));
   }, [dispatch, currentPage, itemsPerPage, filters]);
 

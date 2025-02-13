@@ -8,11 +8,11 @@
   margin: 0 auto;
 }
 
-.homePageWrap {
+.container {
   margin: 212px 741px 180px 0;
 }
 
-.homePageTitle {
+.title {
   font-size: 48px;
   font-weight: 600;
   line-height: 32px;
@@ -24,9 +24,9 @@
   margin-top: 0;
 }
 
-.homePageText {
+.text {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 32px;
   text-align: left;
   text-underline-position: from-font;
@@ -34,6 +34,10 @@
   color: #f7f7f7;
   margin-bottom: 40px;
   margin-top: 0;
+}
+
+.homePageBtn {
+  width: 174px;
 }
 
 @media screen and (min-resolution: 2dppx),

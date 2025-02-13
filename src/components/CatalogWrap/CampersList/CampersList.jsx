@@ -7,7 +7,6 @@ import {
   toggleFavorite,
   setHasMore,
 } from "../../../redux/campers/slice.js";
-
 import {
   selectCampers,
   selectSelectedCampers,
@@ -29,8 +28,8 @@ const CamperList = () => {
   const selectedCampers = useSelector(selectSelectedCampers);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-  const hasMore = useSelector(selectHasMore); // Використовуємо глобальний hasMore з Redux
-  const filters = useSelector(selectFilters); // Отримуємо фільтри з Redux
+  const hasMore = useSelector(selectHasMore);
+  const filters = useSelector(selectFilters);
 
   const [currentItems, setCurrentItems] = useState([]);
   const [itemsPerPage] = useState(4);
@@ -51,7 +50,7 @@ const CamperList = () => {
       });
 
       if (campers.length < itemsPerPage) {
-        dispatch(setHasMore(false)); // Оновлюємо глобальний стан hasMore в Redux
+        dispatch(setHasMore(false));
       }
     }
   }, [campers, itemsPerPage, dispatch]);

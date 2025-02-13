@@ -4,7 +4,7 @@ import s from "./CamperInfo.module.css";
 
 const CamperInfo = ({ camper, handleFavoriteClick, selectedCampers }) => {
   return (
-    <div>
+    <>
       <div className={s.camperInfoWrapOne}>
         <h3 className={s.camperName}>{camper.name}</h3>
         <ul className={s.camperInfoPrice}>
@@ -59,7 +59,7 @@ const CamperInfo = ({ camper, handleFavoriteClick, selectedCampers }) => {
           )}
         </li>
       </ul>
-    </div>
+    </>
   );
 };
 

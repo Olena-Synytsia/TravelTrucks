@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// Ініціалізація axios
 export const baseMockapi = axios.create({
   baseURL: "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io",
   headers: {
@@ -9,19 +8,16 @@ export const baseMockapi = axios.create({
   },
 });
 
-// Запит для отримання кемперів з пагінацією
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
   async ({ page, itemsPerPage }, { getState }, thunkApi) => {
     try {
-      // Отримуємо фільтри з Redux store
       const { filters } = getState().campers;
       console.log("Current filters before request:", filters);
 
-      // Формуємо params для запиту
       const params = {
         page,
-        limit: itemsPerPage, // Параметри пагінації
+        limit: itemsPerPage,
       };
 
       if (filters.location && filters.location.trim()) {
@@ -36,7 +32,6 @@ export const fetchCampers = createAsyncThunk(
         params.transmission = filters.transmission;
       }
 
-      // Додаємо фільтри для булевих значень тільки якщо вони `true`
       if (filters.AC) {
         params.AC = filters.AC;
       }
@@ -55,7 +50,6 @@ export const fetchCampers = createAsyncThunk(
 
       console.log("Final Request Params:", params);
 
-      // Відправляємо запит
       const response = await baseMockapi.get("/campers", { params });
 
       if (response.status === 200) {
@@ -70,7 +64,6 @@ export const fetchCampers = createAsyncThunk(
   }
 );
 
-// Запит для отримання кемпера за його ID
 export const fetchCamperCardById = createAsyncThunk(
   "campers/fetchCamperCardById",
   async (id, thunkApi) => {

@@ -21,7 +21,7 @@ const DetailsWrap = () => {
 
   useEffect(() => {
     if (!tab) {
-      navigate(`/catalog/${id}/features`, { replace: true }); // Автоматичний редирект на features
+      navigate(`/catalog/${id}/features`, { replace: true });
     }
   }, [id, tab, navigate]);
 
@@ -33,13 +33,13 @@ const DetailsWrap = () => {
 
   useEffect(() => {
     if (tab) {
-      setActiveTab(tab); // Якщо в URL є параметр tab, оновлюємо activeTab
+      setActiveTab(tab);
     }
   }, [tab]);
 
   useEffect(() => {
     if (!tab) {
-      navigate(`/catalog/${id}/features`, { replace: true }); // Автоматичний редирект на features
+      navigate(`/catalog/${id}/features`, { replace: true });
     }
   }, [id, tab, navigate]);
 

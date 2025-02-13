@@ -1,7 +1,7 @@
-export const selectCampers = (state) => state.campers.campers; // Список всіх кемперів
-export const selectCamper = (state) => state.campers.camper; // Один кемпер
-export const selectSelectedCampers = (state) => state.campers.selectedCampers; // Список обраних кемперів
-export const selectLoading = (state) => state.campers.loading; // Стан завантаження
-export const selectError = (state) => state.campers.error; // Помилка
-export const selectHasMore = (state) => state.campers.hasMore; // Перевірка, чи є ще кемпери
-export const selectFilters = (state) => state.campers.filters; // Збереження фільтрації
+export const selectCampers = (state) => state.campers.campers;
+export const selectCamper = (state) => state.campers.camper;
+export const selectSelectedCampers = (state) => state.campers.selectedCampers;
+export const selectLoading = (state) => state.campers.loading;
+export const selectError = (state) => state.campers.error;
+export const selectHasMore = (state) => state.campers.hasMore;
+export const selectFilters = (state) => state.campers.filters;

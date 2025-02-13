@@ -21,13 +21,10 @@ const VehicleDetailsWrap = ({ camper }) => {
     }
   }, [dispatch, id]);
 
-  // Якщо дані ще не завантажені
   if (loading) return <Loader />;
 
-  // Якщо сталася помилка
   if (error) return <div>Error: {error}</div>;
 
-  // Якщо camper ще не завантажено (значення undefined)
   if (!camper) return <div>Camper not found</div>;
 
   const capitalizeWords = (str) => {

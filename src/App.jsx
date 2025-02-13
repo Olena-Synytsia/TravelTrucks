@@ -1,23 +1,30 @@
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage.jsx";
-import CatalogPage from "./pages/CatalogPage/CatalogPage.jsx";
-import DetailsPage from "./pages/DetailsPage/DetailsPage.jsx";
+import { Suspense, lazy } from "react";
 import Header from "./components/AppBar/Header/Header.jsx";
-import DetailsWrap from "./components/DetailsWrap/DetailsWrap.jsx";
+import Loader from "./components/Loader/Loader.jsx";
 import "./App.css";
+
+const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
+const CatalogPage = lazy(() => import("./pages/CatalogPage/CatalogPage.jsx"));
+const DetailsPage = lazy(() =>
+  import("./components/DetailsWrap/DetailsWrap.jsx")
+);
+const DetailsWrap = lazy(() =>
+  import("./components/DetailsWrap/DetailsWrap.jsx")
+);
 
 function App() {
   return (
     <>
-      <div>
-        <Header />
+      <Header />
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:id" element={<DetailsPage />} />
           <Route path="/catalog/:id/:tab" element={<DetailsWrap />} />
         </Routes>
-      </div>
+      </Suspense>
     </>
   );
 }

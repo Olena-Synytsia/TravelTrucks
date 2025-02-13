@@ -12,38 +12,48 @@ const campersSlice = createSlice({
       bathroom: false,
       kitchen: false,
       TV: false,
-    }, // параметри фільтрації
-    campers: [], // список всіх кемперів
-    camper: null, // інформація про один кемпер
-    currentPage: 1, // поточна сторінка
-    itemsPerPage: 4, // кількість елементів на сторінці
-    loading: false, // стан завантаження
-    error: null, // помилка
-    selectedCampers: {}, // список обраних кемперів
-    hasMore: true, // чи є ще елементи для завантаження
+    },
+    campers: [],
+    camper: null,
+    currentPage: 1,
+    itemsPerPage: 4,
+    loading: false,
+    error: null,
+    selectedCampers: {},
+    hasMore: true,
   },
   reducers: {
     setCampers(state, action) {
       state.campers = action.payload;
     },
-    // Перемикання фільтрів
     setFilters: (state, action) => {
       state.filters = { ...action.payload };
     },
     toggleFavorite: (state, action) => {
       const id = action.payload;
-      state.selectedCampers[id] = !state.selectedCampers[id]; // Перемикаємо стан обраності
+      state.selectedCampers[id] = !state.selectedCampers[id];
     },
     setPage: (state, action) => {
-      state.currentPage = action.payload; // Оновлення поточної сторінки
+      state.currentPage = action.payload;
     },
     resetCampers: (state) => {
-      state.campers = []; // Очищаємо список кемперів
-      state.currentPage = 1; // Скидаємо поточну сторінку на 1
-      state.hasMore = true; // Перезавантаження наявності більше елементів
+      state.campers = [];
+      state.currentPage = 1;
+      state.hasMore = true;
     },
     setHasMore: (state, action) => {
-      state.hasMore = action.payload; // Оновлення стану hasMore
+      state.hasMore = action.payload;
+    },
+    resetFilters: (state) => {
+      state.filters = {
+        location: "",
+        form: "",
+        transmission: "",
+        AC: false,
+        bathroom: false,
+        kitchen: false,
+        TV: false,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -56,11 +66,11 @@ const campersSlice = createSlice({
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.loading = false;
         if (action.payload.items.length < state.itemsPerPage) {
-          state.hasMore = false; // Якщо сервер повернув менше елементів, ніж вказано в limit
+          state.hasMore = false;
         }
         state.campers = [...state.campers, ...action.payload.items];
 
-        state.currentPage += 1; // оновлюємо сторінку для наступного запиту
+        state.currentPage += 1;
       })
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;
@@ -80,7 +90,14 @@ const campersSlice = createSlice({
   },
 });
 
-export const { setFilters, toggleFavorite, setPage, resetCampers, setHasMore } =
-  campersSlice.actions;
+export const {
+  setFilters,
+  setCampers,
+  toggleFavorite,
+  setPage,
+  resetCampers,
+  setHasMore,
+  resetFilters,
+} = campersSlice.actions;
 
 export const campersReducers = campersSlice.reducer;

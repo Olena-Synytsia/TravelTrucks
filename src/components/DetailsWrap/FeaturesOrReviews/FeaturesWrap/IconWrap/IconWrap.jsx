@@ -22,35 +22,31 @@ const IconWrap = ({ camper }) => {
     }
   }, [dispatch, id]);
 
-  // Якщо дані ще не завантажені
   if (loading) return <div>Loading...</div>;
 
-  // Якщо сталася помилка
   if (error) return <div>Error: {error}</div>;
 
-  // Якщо camper ще не завантажено (значення undefined)
   if (!camper) return <div>Camper not found</div>;
 
   return (
-    <ul className={s.featuresIconWrap}>
-      {Object.keys(iconsCreateData).map((featureKey) => {
-        const { icon: Icon, label, condition } = iconsCreateData[featureKey];
+    <>
+      <ul className={s.featuresIconWrap}>
+        {Object.keys(iconsCreateData).map((featureKey) => {
+          const { icon: Icon, label, condition } = iconsCreateData[featureKey];
 
-        // Перевірка умови для цієї особливості
-        if (!condition(camper)) {
-          return null; // Якщо умова не виконується, не рендеримо іконку
-        }
+          if (!condition(camper)) {
+            return null;
+          }
 
-        return (
-          <li key={featureKey} className={s.featuresIcon}>
-            <Icon className={s.icon} />
-            {/* Рендеримо іконку */}
-            <span className={s.title}>{label}</span>
-            {/* Виводимо текст для цієї іконки */}
-          </li>
-        );
-      })}
-    </ul>
+          return (
+            <li key={featureKey} className={s.featuresIcon}>
+              <Icon className={s.icon} />
+              <span className={s.title}>{label}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 };
 

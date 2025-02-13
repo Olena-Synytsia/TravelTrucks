@@ -60,7 +60,7 @@ const iconsCreateData = {
   transmission: {
     icon: BsDiagram3,
     label: "Automatic",
-    condition: (camper) => camper.transmission,
+    condition: (camper) => camper.transmission === "automatic",
   },
   engine: {
     icon: BsFuelPump,

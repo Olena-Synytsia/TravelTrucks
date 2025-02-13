@@ -1,9 +1,7 @@
-
 import { BsGrid, BsGrid3X3Gap, BsGrid1X2 } from "react-icons/bs";
 import s from "./VehicleTypeFilter.module.css";
 
 const VehicleTypeFilter = ({ vehicleType, setVehicleType }) => {
-
   const formLabels = [
     { label: "panelTruck", icon: <BsGrid1X2 /> },
     { label: "fullyIntegrated", icon: <BsGrid /> },
@@ -11,9 +9,9 @@ const VehicleTypeFilter = ({ vehicleType, setVehicleType }) => {
   ];
 
   const labelReplacement = {
-    panelTruck: "Van", // Заміна "panelTruck" на "Van"
-    fullyIntegrated: "Fully integrated", // "Fully integrated"
-    alcove: "Alcove", // "Alcove"
+    panelTruck: "Van",
+    fullyIntegrated: "Fully integrated",
+    alcove: "Alcove",
   };
 
   const getSelectedType = () => {
@@ -26,7 +24,7 @@ const VehicleTypeFilter = ({ vehicleType, setVehicleType }) => {
       <hr className={s.hr} />
       <ul className={s.iconList}>
         {formLabels.map((item) => {
-          const isActive = getSelectedType === item.label; // Перевірка на активний фільтр
+          const isActive = getSelectedType === item.label;
 
           return (
             <li

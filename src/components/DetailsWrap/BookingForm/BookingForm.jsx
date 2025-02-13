@@ -1,20 +1,18 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// Імпорт компонента DatePicker
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as Yup from "yup";
 import s from "./BookingForm.module.css";
 
 const BookingForm = () => {
-  // Схема валідації
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     email: Yup.string()
       .email("Invalid email format")
       .matches(
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // регулярний вираз для перевірки email
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         "Invalid email format"
       )
       .required("Email is required"),
@@ -22,7 +20,6 @@ const BookingForm = () => {
     comment: Yup.string().required("Comment is required"),
   });
 
-  // Початкові значення
   const initialValues = {
     name: "",
     email: "",
@@ -38,7 +35,7 @@ const BookingForm = () => {
 
   return (
     <div className={s.container}>
-      <h3 className={s.title}>Book your campervan now</h3>
+      <h3 className={s.title}>Book your camper van now</h3>
       <p className={s.text}>Stay connected! We are always ready to help you.</p>
       <Formik
         initialValues={initialValues}
@@ -74,15 +71,14 @@ const BookingForm = () => {
                 </div>
               </li>
 
-              {/* Поле дати з DatePicker */}
               <li className={s.formLi}>
                 <div className={s.inputWrap}>
                   <DatePicker
-                    selected={values.bookingDate} // вибір дати
-                    onChange={(date) => setFieldValue("bookingDate", date)} // оновлення значення дати
+                    selected={values.bookingDate}
+                    onChange={(date) => setFieldValue("bookingDate", date)}
                     className={s.input}
-                    placeholderText="Booking date*" // підказка для користувача
-                    dateFormat="dd/MM/yyyy" // формат дати
+                    placeholderText="Booking date*"
+                    dateFormat="dd/MM/yyyy"
                   />
                   <ErrorMessage
                     name="bookingDate"

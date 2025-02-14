@@ -12,6 +12,9 @@ const DetailsPage = lazy(() =>
 const DetailsWrap = lazy(() =>
   import("./components/DetailsWrap/DetailsWrap.jsx")
 );
+const NotFoundPage = lazy(() =>
+  import("./pages/NotFoundPage/NotFoundPage.jsx")
+);
 
 function App() {
   return (
@@ -23,6 +26,7 @@ function App() {
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:id" element={<DetailsPage />} />
           <Route path="/catalog/:id/:tab" element={<DetailsWrap />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </>

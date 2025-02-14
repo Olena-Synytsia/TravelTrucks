@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchCampers } from "../../../redux/campers/operations.js";
@@ -6,6 +6,7 @@ import {
   resetCampers,
   toggleFavorite,
   setHasMore,
+  setPage,
 } from "../../../redux/campers/slice.js";
 import {
   selectCampers,
@@ -14,6 +15,8 @@ import {
   selectError,
   selectHasMore,
   selectFilters,
+  selectCurrentPage,
+  selectItemsPerPage,
 } from "../../../redux/campers/selectors.js";
 import Loader from "../../Loader/Loader.jsx";
 import CamperInfo from "../CamperInfo/CamperInfo.jsx";
@@ -30,25 +33,31 @@ const CamperList = () => {
   const error = useSelector(selectError);
   const hasMore = useSelector(selectHasMore);
   const filters = useSelector(selectFilters);
-
-  const [currentItems, setCurrentItems] = useState([]);
-  const [itemsPerPage] = useState(4);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useSelector(selectCurrentPage);
+  const itemsPerPage = useSelector(selectItemsPerPage);
 
   useEffect(() => {
     dispatch(resetCampers());
-    dispatch(fetchCampers({ page: currentPage, itemsPerPage, filters }));
+  }, [dispatch, filters]);
+
+  useEffect(() => {
+    if (currentPage === 1) {
+      dispatch(setPage(1));
+    }
+  }, [dispatch, currentPage]);
+
+  useEffect(() => {
+    dispatch(setPage(1));
+  }, [dispatch, filters]);
+
+  useEffect(() => {
+    if (currentPage === 1) {
+      dispatch(fetchCampers({ page: currentPage, itemsPerPage, filters }));
+    }
   }, [dispatch, currentPage, itemsPerPage, filters]);
 
   useEffect(() => {
     if (campers && campers.length > 0) {
-      setCurrentItems((prevItems) => {
-        const newItems = campers.filter(
-          (camper) => !prevItems.some((item) => item.id === camper.id)
-        );
-        return [...prevItems, ...newItems];
-      });
-
       if (campers.length < itemsPerPage) {
         dispatch(setHasMore(false));
       }
@@ -57,7 +66,9 @@ const CamperList = () => {
 
   const loadMoreItems = () => {
     if (hasMore) {
-      setCurrentPage((prevPage) => prevPage + 1);
+      const nextPage = currentPage + 1;
+      dispatch(fetchCampers({ page: nextPage, limit: itemsPerPage, filters }));
+      dispatch(setPage(nextPage));
     }
   };
 
@@ -79,10 +90,7 @@ const CamperList = () => {
   };
 
   if (loading) return <Loader />;
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if (error) return <div>Error: {error}</div>;
 
   const handleFavoriteClick = (id) => {
     dispatch(toggleFavorite(id));
@@ -94,7 +102,7 @@ const CamperList = () => {
 
   return (
     <div className={s.container}>
-      {currentItems.map((camper, index) => (
+      {campers.map((camper, index) => (
         <div key={`${camper.id}-${index}`} className={s.camperListCard}>
           <div className={s.gallery}>
             {camper.gallery && camper.gallery.length > 0 && (
@@ -113,7 +121,6 @@ const CamperList = () => {
             />
             <p className={s.camperDescription}>{camper.description}</p>
             <ul className={s.iconContainerWrap}>{renderIcons(camper)}</ul>
-
             <button
               type="button"
               className={s.camperListBtn}

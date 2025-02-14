@@ -10,10 +10,9 @@ export const baseMockapi = axios.create({
 
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
-  async ({ page, itemsPerPage }, { getState }, thunkApi) => {
+  async ({ page, filters }, { getState }, thunkApi) => {
     try {
-      const { filters } = getState().campers;
-      console.log("Current filters before request:", filters);
+      const { itemsPerPage } = getState().campers;
 
       const params = {
         page,
@@ -48,15 +47,11 @@ export const fetchCampers = createAsyncThunk(
         params.TV = filters.TV;
       }
 
-      console.log("Final Request Params:", params);
-
       const response = await baseMockapi.get("/campers", { params });
 
       if (response.status === 200) {
-        console.log("Response:", response.data);
         return response.data;
       }
-
       throw new Error("Server returned an error");
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

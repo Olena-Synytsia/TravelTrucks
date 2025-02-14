@@ -13,6 +13,10 @@
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #101828;
+  width: 340px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .camperInfoName {

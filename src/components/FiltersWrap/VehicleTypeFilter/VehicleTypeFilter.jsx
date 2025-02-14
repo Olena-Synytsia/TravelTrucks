@@ -24,7 +24,7 @@ const VehicleTypeFilter = ({ vehicleType, setVehicleType }) => {
       <hr className={s.hr} />
       <ul className={s.iconList}>
         {formLabels.map((item) => {
-          const isActive = getSelectedType === item.label;
+          const isActive = getSelectedType() === item.label;
 
           return (
             <li

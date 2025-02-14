@@ -36,6 +36,9 @@ const campersSlice = createSlice({
     setPage: (state, action) => {
       state.currentPage = action.payload;
     },
+    setItemsPerPage: (state, action) => {
+      state.itemsPerPage = action.payload;
+    },
     resetCampers: (state) => {
       state.campers = [];
       state.currentPage = 1;
@@ -59,7 +62,6 @@ const campersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCampers.pending, (state) => {
-        if (state.loading) return;
         state.loading = true;
         state.error = null;
       })
@@ -68,9 +70,11 @@ const campersSlice = createSlice({
         if (action.payload.items.length < state.itemsPerPage) {
           state.hasMore = false;
         }
-        state.campers = [...state.campers, ...action.payload.items];
-
-        state.currentPage += 1;
+        if (action.payload.items?.length > 0) {
+          state.campers = [...state.campers, ...action.payload.items];
+        } else {
+          console.log("No campers returned from API");
+        }
       })
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;
@@ -95,6 +99,7 @@ export const {
   setCampers,
   toggleFavorite,
   setPage,
+  setItemsPerPage,
   resetCampers,
   setHasMore,
   resetFilters,

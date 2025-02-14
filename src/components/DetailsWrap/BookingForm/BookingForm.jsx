@@ -28,7 +28,6 @@ const BookingForm = () => {
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
     toast.success("Your booking has been successfully placed!");
     resetForm();
   };

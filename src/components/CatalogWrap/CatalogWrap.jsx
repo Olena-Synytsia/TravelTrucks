@@ -3,7 +3,7 @@ import CamperList from "./CampersList/CampersList.jsx";
 import Filters from "../FiltersWrap/Filters/Filters.jsx";
 import s from "./CatalogWrap.module.css";
 
-const CatalogPage = () => {
+const CatalogWrap = () => {
   return (
     <div className={s.container}>
       <Filters />
@@ -12,4 +12,4 @@ const CatalogPage = () => {
   );
 };
 
-export default CatalogPage;
+export default CatalogWrap;

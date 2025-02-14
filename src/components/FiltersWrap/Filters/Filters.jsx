@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  setFilters,
-  resetCampers,
-  resetFilters,
-} from "../../../redux/campers/slice.js";
+import { setFilters } from "../../../redux/campers/slice.js";
 import LocationFilter from "../LocationFilter/LocationFilter.jsx";
 import VehicleEquipmentFilter from "../VehicleEquipmentFilter/VehicleEquipmentFilter.jsx";
 import VehicleTypeFilter from "../VehicleTypeFilter/VehicleTypeFilter.jsx";
@@ -19,7 +15,6 @@ const Filters = () => {
   const [vehicleType, setVehicleType] = useState("");
 
   const handleSearchClick = () => {
-    dispatch(resetFilters());
     const filters = {
       location,
       form: vehicleType || "",
@@ -35,8 +30,6 @@ const Filters = () => {
     setLocation("");
     setVehicleEquipment([]);
     setVehicleType("");
-
-    dispatch(resetCampers());
   };
 
   return (

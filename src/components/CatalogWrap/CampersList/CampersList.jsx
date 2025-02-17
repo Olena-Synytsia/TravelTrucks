@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchCampers } from "../../../redux/campers/operations.js";
@@ -35,6 +35,8 @@ const CamperList = () => {
   const filters = useSelector(selectFilters);
   const currentPage = useSelector(selectCurrentPage);
   const itemsPerPage = useSelector(selectItemsPerPage);
+  const loadMoreBtnRef = useRef(null);
+  const scrollPositionRef = useRef(0);
 
   useEffect(() => {
     dispatch(resetCampers());
@@ -66,11 +68,21 @@ const CamperList = () => {
 
   const loadMoreItems = () => {
     if (hasMore) {
+      const currentScrollPosition = window.scrollY;
+      scrollPositionRef.current = currentScrollPosition; // Зберігаємо поточну позицію
+
       const nextPage = currentPage + 1;
       dispatch(fetchCampers({ page: nextPage, limit: itemsPerPage, filters }));
       dispatch(setPage(nextPage));
     }
   };
+
+  // Відновлюємо позицію після завантаження нових даних
+  useEffect(() => {
+    if (scrollPositionRef.current !== 0) {
+      window.scrollTo(0, scrollPositionRef.current); // Відновлюємо збережену позицію
+    }
+  }, [campers]);
 
   const renderIcons = (camper) => {
     const filteredKeys = ["transmission", "engine", "kitchen", "AC"];
@@ -133,7 +145,11 @@ const CamperList = () => {
       ))}
 
       {hasMore && (
-        <button className={s.loadMoreBtn} onClick={loadMoreItems}>
+        <button
+          ref={loadMoreBtnRef}
+          className={s.loadMoreBtn}
+          onClick={loadMoreItems}
+        >
           Load More
         </button>
       )}

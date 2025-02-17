@@ -1,15 +1,18 @@
+import { useSelector } from "react-redux";
 import { BsFillStarFill } from "react-icons/bs";
 import s from "./ReviewsWrap.module.css";
 
-const ReviewsWrapper = ({ reviews }) => {
-  if (!reviews || reviews.length === 0) {
+const ReviewsWrap = () => {
+  const camper = useSelector((state) => state.campers.camper);
+
+  if (!camper || !camper.reviews || camper.reviews.length === 0) {
     return <p>No reviews yet.</p>;
   }
 
   return (
     <div className={s.container}>
-      {reviews.map((review, index) => (
-        <div key={index} className={s.reviewCard}>
+      {camper.reviews.map((review, index) => (
+        <div key={review.reviewer_name + index} className={s.reviewCard}>
           <div className={s.reviewCardEl}>
             <div className={s.reviewerIcon}>
               {review.reviewer_name[0].toUpperCase()}
@@ -31,7 +34,6 @@ const ReviewsWrapper = ({ reviews }) => {
               </div>
             </div>
           </div>
-
           <p className={s.reviewText}>{review.comment}</p>
         </div>
       ))}
@@ -39,4 +41,4 @@ const ReviewsWrapper = ({ reviews }) => {
   );
 };
 
-export default ReviewsWrapper;
+export default ReviewsWrap;

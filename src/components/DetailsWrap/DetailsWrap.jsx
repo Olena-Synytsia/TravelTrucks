@@ -1,51 +1,26 @@
-import { useParams, NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import CamperCard from "./CamperCard/CamperCard.jsx";
+import { useParams, NavLink } from "react-router-dom";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import clsx from "clsx";
-import ReviewsWrapper from "../DetailsWrap/FeaturesOrReviews/ReviewsWrap/ReviewsWrap.jsx";
-import FeaturesWrap from "../DetailsWrap/FeaturesOrReviews/FeaturesWrap/FeaturesWrap.jsx";
+import CamperCard from "./CamperCard/CamperCard.jsx";
 import BookingForm from "./BookingForm/BookingForm.jsx";
-
 import s from "./DetailsWrap.module.css";
 
 const DetailsWrap = () => {
-  const { id, tab } = useParams();
-  const navigate = useNavigate();
-
-  const camper = useSelector((state) =>
-    state.campers.camper && state.campers.camper.id === id
-      ? state.campers.camper
-      : null
-  );
-
-  useEffect(() => {
-    if (!tab) {
-      navigate(`/catalog/${id}/features`, { replace: true });
-    }
-  }, [id, tab, navigate]);
-
-  const [activeTab, setActiveTab] = useState(tab || "features");
+  const { id } = useParams();
+  const [isCamperCardLoaded, setIsCamperCardLoaded] = useState(false);
 
   const buildLinkClass = ({ isActive }) => {
     return clsx(s.link, isActive && s.activeLink);
   };
 
-  useEffect(() => {
-    if (tab) {
-      setActiveTab(tab);
-    }
-  }, [tab]);
-
-  useEffect(() => {
-    if (!tab) {
-      navigate(`/catalog/${id}/features`, { replace: true });
-    }
-  }, [id, tab, navigate]);
+  const handleCamperCardLoad = () => {
+    setIsCamperCardLoaded(true);
+  };
 
   return (
     <div className="section">
-      <CamperCard camperId={id} />
+      <CamperCard camperId={id} onLoad={handleCamperCardLoad} />
       <div className={s.title}>
         <NavLink to={`/catalog/${id}/features`} className={buildLinkClass}>
           Features
@@ -58,18 +33,7 @@ const DetailsWrap = () => {
       <hr className={s.hr} />
 
       <div className={s.infoWrap}>
-        <div>
-          {activeTab === "features" && (
-            <FeaturesWrap className={s.featuresContainer} camper={camper} />
-          )}
-          {activeTab === "reviews" && camper && (
-            <ReviewsWrapper
-              reviews={camper.reviews}
-              className={s.reviewsContainer}
-              camper={camper}
-            />
-          )}
-        </div>
+        <div>{isCamperCardLoaded && <Outlet />}</div>
         <BookingForm className={s.bookingForm} />
       </div>
     </div>

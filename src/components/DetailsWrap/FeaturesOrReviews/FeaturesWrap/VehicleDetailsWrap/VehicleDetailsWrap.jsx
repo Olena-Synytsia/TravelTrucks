@@ -2,17 +2,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCamperCardById } from "../../../../../redux/campers/operations.js";
-import {
-  selectLoading,
-  selectError,
-} from "../../../../../redux/campers/selectors.js";
-import Loader from "../../../../Loader/Loader.jsx";
+import { selectError } from "../../../../../redux/campers/selectors.js";
 import s from "./VehicleDetailsWrap.module.css";
 
 const VehicleDetailsWrap = ({ camper }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   useEffect(() => {
@@ -20,8 +15,6 @@ const VehicleDetailsWrap = ({ camper }) => {
       dispatch(fetchCamperCardById(id));
     }
   }, [dispatch, id]);
-
-  if (loading) return <Loader />;
 
   if (error) return <div>Error: {error}</div>;
 
@@ -37,7 +30,7 @@ const VehicleDetailsWrap = ({ camper }) => {
 
   return (
     <>
-      <h3 className={s.title}>VehicleDetailsWrap</h3>
+      <h3 className={s.title}>Vehicle details</h3>
       <hr className={s.hr} />
       <ul className={s.vehicleDetail}>
         <li className={s.vehicleDetailLi}>

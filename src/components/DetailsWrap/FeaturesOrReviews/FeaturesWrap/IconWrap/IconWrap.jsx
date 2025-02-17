@@ -2,10 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCamperCardById } from "../../../../../redux/campers/operations.js";
-import {
-  selectLoading,
-  selectError,
-} from "../../../../../redux/campers/selectors.js";
+import { selectError } from "../../../../../redux/campers/selectors.js";
 import iconsCreateData from "../../../../iconsCreateData/iconsCreateData.jsx";
 import s from "./IconWrap.module.css";
 
@@ -13,7 +10,6 @@ const IconWrap = ({ camper }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   useEffect(() => {
@@ -21,8 +17,6 @@ const IconWrap = ({ camper }) => {
       dispatch(fetchCamperCardById(id));
     }
   }, [dispatch, id]);
-
-  if (loading) return <div>Loading...</div>;
 
   if (error) return <div>Error: {error}</div>;
 

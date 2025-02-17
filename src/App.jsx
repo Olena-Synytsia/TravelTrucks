@@ -6,12 +6,18 @@ import "./App.css";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
 const CatalogPage = lazy(() => import("./pages/CatalogPage/CatalogPage.jsx"));
-const DetailsPage = lazy(() =>
-  import("./components/DetailsWrap/DetailsWrap.jsx")
+const DetailsPage = lazy(() => import("./pages/DetailsPage/DetailsPage.jsx"));
+const FeaturesWrap = lazy(() =>
+  import(
+    "./components/DetailsWrap/FeaturesOrReviews/FeaturesWrap/FeaturesWrap.jsx"
+  )
 );
-const DetailsWrap = lazy(() =>
-  import("./components/DetailsWrap/DetailsWrap.jsx")
+const ReviewsWrap = lazy(() =>
+  import(
+    "./components/DetailsWrap/FeaturesOrReviews/ReviewsWrap/ReviewsWrap.jsx"
+  )
 );
+
 const NotFoundPage = lazy(() =>
   import("./pages/NotFoundPage/NotFoundPage.jsx")
 );
@@ -24,8 +30,11 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
-          <Route path="/catalog/:id" element={<DetailsPage />} />
-          <Route path="/catalog/:id/:tab" element={<DetailsWrap />} />
+          <Route path="/catalog/:id" element={<DetailsPage />}>
+            <Route index element={<FeaturesWrap />} />
+            <Route path="features" element={<FeaturesWrap />} />
+            <Route path="reviews" element={<ReviewsWrap />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

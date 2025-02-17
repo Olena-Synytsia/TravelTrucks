@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Header from "./components/AppBar/Header/Header.jsx";
 import Loader from "./components/Loader/Loader.jsx";
+import ScrollUp from "./components/ScrollUp/ScrollUp.jsx";
 import "./App.css";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
@@ -38,6 +39,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
+      <ScrollUp />
     </>
   );
 }

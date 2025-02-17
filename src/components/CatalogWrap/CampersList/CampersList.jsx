@@ -69,7 +69,7 @@ const CamperList = () => {
   const loadMoreItems = () => {
     if (hasMore) {
       const currentScrollPosition = window.scrollY;
-      scrollPositionRef.current = currentScrollPosition; // Зберігаємо поточну позицію
+      scrollPositionRef.current = currentScrollPosition;
 
       const nextPage = currentPage + 1;
       dispatch(fetchCampers({ page: nextPage, limit: itemsPerPage, filters }));
@@ -77,10 +77,9 @@ const CamperList = () => {
     }
   };
 
-  // Відновлюємо позицію після завантаження нових даних
   useEffect(() => {
     if (scrollPositionRef.current !== 0) {
-      window.scrollTo(0, scrollPositionRef.current); // Відновлюємо збережену позицію
+      window.scrollTo(0, scrollPositionRef.current);
     }
   }, [campers]);
 

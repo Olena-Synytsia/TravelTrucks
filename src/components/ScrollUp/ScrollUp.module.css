@@ -1,0 +1,22 @@
+.scrollUpBtn {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #e44848;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.scrollUpBtn.visible {
+  opacity: 1;
+}
+
+.scrollUpBtn:not(.visible) {
+  opacity: 0;
+}

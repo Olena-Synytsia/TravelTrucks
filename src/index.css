@@ -151,14 +151,20 @@ div.react-datepicker__day {
 }
 
 div.react-datepicker__day--selected {
-  border-radius: 50%;
   background-color: #475467;
   color: #f7f7f7;
 }
 
 div.react-datepicker__day--keyboard-selected {
-  border-radius: 50%;
   background-color: #dadde1;
+}
+
+div.react-datepicker__day--disabled {
+  color: #6c717b;
+}
+
+div.react-datepicker__day--today {
+  color: #d84343;
 }
 
 div.react-datepicker__day-names {

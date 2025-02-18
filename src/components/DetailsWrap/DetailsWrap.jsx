@@ -1,5 +1,13 @@
-import { useParams, NavLink, useLocation, Outlet } from "react-router-dom";
+import {
+  useParams,
+  NavLink,
+  useLocation,
+  Outlet,
+  useNavigate,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectError } from "../../redux/campers/selectors.js";
 import CamperCard from "./CamperCard/CamperCard.jsx";
 import BookingForm from "./BookingForm/BookingForm.jsx";
 import s from "./DetailsWrap.module.css";
@@ -7,6 +15,8 @@ import s from "./DetailsWrap.module.css";
 const DetailsWrap = () => {
   const { id } = useParams();
   const location = useLocation();
+  const error = useSelector(selectError);
+  const navigate = useNavigate();
   const [isCamperCardLoaded, setIsCamperCardLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState("features");
 
@@ -21,6 +31,12 @@ const DetailsWrap = () => {
   const handleCamperCardLoad = () => {
     setIsCamperCardLoaded(true);
   };
+
+  useEffect(() => {
+    if (error) {
+      navigate("/404", { replace: true });
+    }
+  }, [error, navigate]);
 
   return (
     <div className="section">

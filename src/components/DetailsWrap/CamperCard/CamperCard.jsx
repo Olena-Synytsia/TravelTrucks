@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCamperCardById } from "../../../redux/campers/operations.js";
-import { selectCamper, selectError } from "../../../redux/campers/selectors.js";
+import { selectCamper } from "../../../redux/campers/selectors.js";
 import { BsFillStarFill } from "react-icons/bs";
 import { IoMapOutline } from "react-icons/io5";
 import s from "./CamperCard.module.css";
@@ -10,7 +10,6 @@ const CamperCard = ({ camperId, onLoad }) => {
   const dispatch = useDispatch();
 
   const camper = useSelector(selectCamper);
-  const error = useSelector(selectError);
 
   useEffect(() => {
     onLoad();
@@ -22,9 +21,6 @@ const CamperCard = ({ camperId, onLoad }) => {
     }
     dispatch(fetchCamperCardById(camperId));
   }, [dispatch, camperId]);
-
-  if (error) return <div>{error}</div>;
-  if (!camper) return <div>No camper data available.</div>;
 
   return (
     <div className={s.container}>

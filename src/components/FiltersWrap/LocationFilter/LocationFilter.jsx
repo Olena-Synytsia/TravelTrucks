@@ -3,7 +3,7 @@ import s from "./LocationFilter.module.css";
 
 const LocationFilter = ({ location, setLocation }) => {
   const handleLocationChange = (event) => {
-    setLocation(event.target.value); 
+    setLocation(event.target.value);
   };
 
   return (

@@ -78,6 +78,7 @@ const BookingForm = () => {
                     className={s.input}
                     placeholderText="Booking date*"
                     dateFormat="dd/MM/yyyy"
+                    minDate={new Date()}
                   />
                   <ErrorMessage
                     name="bookingDate"

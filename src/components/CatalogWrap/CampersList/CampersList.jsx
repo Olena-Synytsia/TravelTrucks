@@ -101,7 +101,7 @@ const CamperList = () => {
   };
 
   if (loading) return <Loader />;
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div className={s.error}>Camper not found</div>;
 
   const handleFavoriteClick = (id) => {
     dispatch(toggleFavorite(id));

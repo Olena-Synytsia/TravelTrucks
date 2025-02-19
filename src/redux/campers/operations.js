@@ -65,11 +65,10 @@ export const fetchCamperCardById = createAsyncThunk(
     try {
       const response = await baseMockapi.get(`/campers/${id}`);
       if (!response.data) {
-        throw new Error("No data received for the camper.");
+        throw new Error("No data received for the camper");
       }
       return response.data;
     } catch (error) {
-      console.log(error.message);
       return thunkApi.rejectWithValue(error.message);
     }
   }

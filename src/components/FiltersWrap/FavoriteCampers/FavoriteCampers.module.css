@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.favoriteLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hiddenCheckbox {
+  display: none;
+}
+
+.icon {
+  fill: #101828;
+  width: 26px;
+  height: 24px;
+}
+
+.checked {
+  fill: #e44848;
+  width: 28px;
+  height: 26px;
+}

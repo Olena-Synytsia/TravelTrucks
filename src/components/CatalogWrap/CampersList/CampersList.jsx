@@ -11,14 +11,13 @@ import {
 import {
   selectCampers,
   selectSelectedCampers,
-  selectLoading,
   selectError,
   selectHasMore,
   selectFilters,
   selectCurrentPage,
   selectItemsPerPage,
+  selectShowFavoritesOnly,
 } from "../../../redux/campers/selectors.js";
-import Loader from "../../Loader/Loader.jsx";
 import CamperInfo from "../CamperInfo/CamperInfo.jsx";
 import iconsCreateData from "../../iconsCreateData/iconsCreateData.jsx";
 import s from "./CampersList.module.css";
@@ -28,15 +27,20 @@ const CamperList = () => {
   const navigate = useNavigate();
 
   const campers = useSelector(selectCampers);
+
   const selectedCampers = useSelector(selectSelectedCampers);
-  const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const hasMore = useSelector(selectHasMore);
   const filters = useSelector(selectFilters);
+  const showFavoritesOnly = useSelector(selectShowFavoritesOnly);
   const currentPage = useSelector(selectCurrentPage);
   const itemsPerPage = useSelector(selectItemsPerPage);
   const loadMoreBtnRef = useRef(null);
   const scrollPositionRef = useRef(0);
+
+  const filteredCampers = showFavoritesOnly
+    ? campers.filter((camper) => selectedCampers[camper.id])
+    : campers;
 
   useEffect(() => {
     dispatch(resetCampers());
@@ -100,9 +104,7 @@ const CamperList = () => {
     });
   };
 
-  if (loading) return <Loader />;
   if (error) return <div className={s.error}>Camper not found</div>;
-
   const handleFavoriteClick = (id) => {
     dispatch(toggleFavorite(id));
   };
@@ -113,7 +115,7 @@ const CamperList = () => {
 
   return (
     <div className={s.container}>
-      {campers.map((camper, index) => (
+      {filteredCampers.map((camper, index) => (
         <div key={`${camper.id}-${index}`} className={s.camperListCard}>
           <div className={s.gallery}>
             {camper.gallery && camper.gallery.length > 0 && (

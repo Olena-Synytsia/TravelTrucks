@@ -4,6 +4,7 @@ import { setFilters } from "../../../redux/campers/slice.js";
 import LocationFilter from "../LocationFilter/LocationFilter.jsx";
 import VehicleEquipmentFilter from "../VehicleEquipmentFilter/VehicleEquipmentFilter.jsx";
 import VehicleTypeFilter from "../VehicleTypeFilter/VehicleTypeFilter.jsx";
+import FavoriteCampers from "../FavoriteCampers/FavoriteCampers.jsx";
 
 import s from "./Filters.module.css";
 
@@ -47,6 +48,7 @@ const Filters = () => {
       <button type="button" onClick={handleSearchClick}>
         Search
       </button>
+      <FavoriteCampers />
     </div>
   );
 };

@@ -22,13 +22,14 @@ const campersSlice = createSlice({
     selectedCampers: {},
     hasMore: true,
     isFirstVisit: true,
+    showFavoritesOnly: false,
   },
   reducers: {
-    setCampers(state, action) {
-      state.campers = action.payload;
-    },
     setFilters: (state, action) => {
       state.filters = { ...action.payload };
+    },
+    setShowFavoritesOnly: (state, action) => {
+      state.showFavoritesOnly = action.payload;
     },
     toggleFavorite: (state, action) => {
       const id = action.payload;
@@ -37,9 +38,6 @@ const campersSlice = createSlice({
     setPage: (state, action) => {
       state.currentPage = action.payload;
     },
-    setItemsPerPage: (state, action) => {
-      state.itemsPerPage = action.payload;
-    },
     resetCampers: (state) => {
       state.campers = [];
       state.currentPage = 1;
@@ -47,17 +45,6 @@ const campersSlice = createSlice({
     },
     setHasMore: (state, action) => {
       state.hasMore = action.payload;
-    },
-    resetFilters: (state) => {
-      state.filters = {
-        location: "",
-        form: "",
-        transmission: "",
-        AC: false,
-        bathroom: false,
-        kitchen: false,
-        TV: false,
-      };
     },
     setIsFirstVisit: (state, action) => {
       state.isFirstVisit = action.payload;
@@ -76,8 +63,6 @@ const campersSlice = createSlice({
         }
         if (action.payload.items?.length > 0) {
           state.campers = [...state.campers, ...action.payload.items];
-        } else {
-          console.log("No campers returned from API");
         }
       })
       .addCase(fetchCampers.rejected, (state, action) => {
@@ -100,13 +85,11 @@ const campersSlice = createSlice({
 
 export const {
   setFilters,
-  setCampers,
+  setShowFavoritesOnly,
   toggleFavorite,
   setPage,
-  setItemsPerPage,
   resetCampers,
   setHasMore,
-  resetFilters,
   setIsFirstVisit,
 } = campersSlice.actions;
 

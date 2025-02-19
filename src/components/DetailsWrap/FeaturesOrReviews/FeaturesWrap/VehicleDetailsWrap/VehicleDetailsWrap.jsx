@@ -1,24 +1,19 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCamperCardById } from "../../../../../redux/campers/operations.js";
-import { selectError } from "../../../../../redux/campers/selectors.js";
+
 import s from "./VehicleDetailsWrap.module.css";
 
 const VehicleDetailsWrap = ({ camper }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const error = useSelector(selectError);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchCamperCardById(id));
     }
   }, [dispatch, id]);
-
-  if (error) return <div>Error: {error}</div>;
-
-  if (!camper) return <div>Camper not found</div>;
 
   const capitalizeWords = (str) => {
     return str

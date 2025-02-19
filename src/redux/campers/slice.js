@@ -21,6 +21,7 @@ const campersSlice = createSlice({
     error: null,
     selectedCampers: {},
     hasMore: true,
+    isFirstVisit: true,
   },
   reducers: {
     setCampers(state, action) {
@@ -57,6 +58,9 @@ const campersSlice = createSlice({
         kitchen: false,
         TV: false,
       };
+    },
+    setIsFirstVisit: (state, action) => {
+      state.isFirstVisit = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -103,6 +107,7 @@ export const {
   resetCampers,
   setHasMore,
   resetFilters,
+  setIsFirstVisit,
 } = campersSlice.actions;
 
 export const campersReducers = campersSlice.reducer;

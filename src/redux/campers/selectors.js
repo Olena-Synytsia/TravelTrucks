@@ -7,3 +7,4 @@ export const selectCurrentPage = (state) => state.campers.currentPage;
 export const selectItemsPerPage = (state) => state.campers.itemsPerPage;
 export const selectHasMore = (state) => state.campers.hasMore;
 export const selectFilters = (state) => state.campers.filters;
+export const selectIsFirstVisit = (state) => state.campers.isFirstVisit;

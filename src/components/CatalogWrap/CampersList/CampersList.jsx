@@ -74,24 +74,23 @@ const CamperList = () => {
 
   const loadMoreItems = () => {
     if (hasMore && !isLoading) {
-      setIsLoading(true); // Блокуємо кнопку під час завантаження
+      setIsLoading(true);
       const currentScrollPosition = window.scrollY;
       scrollPositionRef.current = currentScrollPosition;
 
       const nextPage = currentPage + 1;
       dispatch(fetchCampers({ page: nextPage, limit: itemsPerPage, filters }))
         .then(() => {
-          setIsLoading(false); // Завантаження завершено, розблоковуємо кнопку
-          dispatch(setPage(nextPage)); // Оновлюємо сторінку після завантаження
+          setIsLoading(false);
+          dispatch(setPage(nextPage));
         })
         .catch((error) => {
           console.error(error);
-          setIsLoading(false); // Якщо сталася помилка, розблоковуємо кнопку
+          setIsLoading(false);
         });
 
-      // Втрачаємо фокус з кнопки
       if (loadMoreBtnRef.current) {
-        loadMoreBtnRef.current.blur(); // Втрачаємо фокус
+        loadMoreBtnRef.current.blur();
       }
     }
   };
@@ -130,45 +129,49 @@ const CamperList = () => {
 
   return (
     <div className={s.container}>
-      {filteredCampers.map((camper, index) => (
-        <div key={`${camper.id}-${index}`} className={s.camperListCard}>
-          <div className={s.gallery}>
-            {camper.gallery && camper.gallery.length > 0 && (
-              <img
-                src={camper.gallery[0].original}
-                alt={camper.name}
-                className={s.img}
-              />
-            )}
-          </div>
-          <div className={s.campersCardInfo}>
-            <CamperInfo
-              camper={camper}
-              handleFavoriteClick={handleFavoriteClick}
-              selectedCampers={selectedCampers}
-            />
-            <p className={s.camperDescription}>{camper.description}</p>
-            <ul className={s.iconContainerWrap}>{renderIcons(camper)}</ul>
-            <button
-              type="button"
-              className={s.camperListBtn}
-              onClick={() => handleClick(camper)}
-            >
-              Show more
-            </button>
-          </div>
-        </div>
-      ))}
+      {filteredCampers.length > 0 && (
+        <>
+          {filteredCampers.map((camper, index) => (
+            <div key={`${camper.id}-${index}`} className={s.camperListCard}>
+              <div className={s.gallery}>
+                {camper.gallery && camper.gallery.length > 0 && (
+                  <img
+                    src={camper.gallery[0].original}
+                    alt={camper.name}
+                    className={s.img}
+                  />
+                )}
+              </div>
+              <div className={s.campersCardInfo}>
+                <CamperInfo
+                  camper={camper}
+                  handleFavoriteClick={handleFavoriteClick}
+                  selectedCampers={selectedCampers}
+                />
+                <p className={s.camperDescription}>{camper.description}</p>
+                <ul className={s.iconContainerWrap}>{renderIcons(camper)}</ul>
+                <button
+                  type="button"
+                  className={s.camperListBtn}
+                  onClick={() => handleClick(camper)}
+                >
+                  Show more
+                </button>
+              </div>
+            </div>
+          ))}
 
-      {hasMore && (
-        <button
-          ref={loadMoreBtnRef}
-          className={s.loadMoreBtn}
-          onClick={loadMoreItems}
-          disabled={isLoading}
-        >
-          {isLoading ? "Loading..." : "Load More"}
-        </button>
+          {hasMore && (
+            <button
+              ref={loadMoreBtnRef}
+              className={s.loadMoreBtn}
+              onClick={loadMoreItems}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Load More"}
+            </button>
+          )}
+        </>
       )}
     </div>
   );

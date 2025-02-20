@@ -67,8 +67,12 @@ const DetailsWrap = () => {
       <hr className={s.hr} />
 
       <div className={s.infoWrap}>
-        <div>{isCamperCardLoaded && <Outlet />}</div>
-        <BookingForm className={s.bookingForm} />
+        {isCamperCardLoaded && (
+          <>
+            <div>{isCamperCardLoaded && <Outlet />}</div>
+            <BookingForm className={s.bookingForm} />
+          </>
+        )}
       </div>
     </div>
   );

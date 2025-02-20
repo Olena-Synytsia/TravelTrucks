@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchCampers } from "../../../redux/campers/operations.js";
@@ -38,6 +38,8 @@ const CamperList = () => {
   const loadMoreBtnRef = useRef(null);
   const scrollPositionRef = useRef(0);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const filteredCampers = showFavoritesOnly
     ? campers.filter((camper) => selectedCampers[camper.id])
     : campers;
@@ -71,13 +73,26 @@ const CamperList = () => {
   }, [campers, itemsPerPage, dispatch]);
 
   const loadMoreItems = () => {
-    if (hasMore) {
+    if (hasMore && !isLoading) {
+      setIsLoading(true); // Блокуємо кнопку під час завантаження
       const currentScrollPosition = window.scrollY;
       scrollPositionRef.current = currentScrollPosition;
 
       const nextPage = currentPage + 1;
-      dispatch(fetchCampers({ page: nextPage, limit: itemsPerPage, filters }));
-      dispatch(setPage(nextPage));
+      dispatch(fetchCampers({ page: nextPage, limit: itemsPerPage, filters }))
+        .then(() => {
+          setIsLoading(false); // Завантаження завершено, розблоковуємо кнопку
+          dispatch(setPage(nextPage)); // Оновлюємо сторінку після завантаження
+        })
+        .catch((error) => {
+          console.error(error);
+          setIsLoading(false); // Якщо сталася помилка, розблоковуємо кнопку
+        });
+
+      // Втрачаємо фокус з кнопки
+      if (loadMoreBtnRef.current) {
+        loadMoreBtnRef.current.blur(); // Втрачаємо фокус
+      }
     }
   };
 
@@ -150,8 +165,9 @@ const CamperList = () => {
           ref={loadMoreBtnRef}
           className={s.loadMoreBtn}
           onClick={loadMoreItems}
+          disabled={isLoading}
         >
-          Load More
+          {isLoading ? "Loading..." : "Load More"}
         </button>
       )}
     </div>

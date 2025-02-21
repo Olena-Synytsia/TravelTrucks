@@ -16,10 +16,10 @@ const Navigation = () => {
 
   return (
     <div className={s.navigation}>
-      <NavLink className={buildLinkClass} to="/">
+      <NavLink className={buildLinkClass} to="/" aria-label="Nome">
         Nome
       </NavLink>
-      <NavLink className={buildLinkClass} to="/catalog">
+      <NavLink className={buildLinkClass} to="/catalog" aria-label="Catalog">
         Catalog
       </NavLink>
     </div>

@@ -45,7 +45,7 @@ const Filters = () => {
         vehicleType={vehicleType}
         setVehicleType={setVehicleType}
       />
-      <button type="button" onClick={handleSearchClick}>
+      <button type="button" onClick={handleSearchClick} aria-label="Search">
         Search
       </button>
       <FavoriteCampers />

@@ -31,6 +31,7 @@ const ScrollUp = () => {
   return (
     <button
       onClick={handleScrollUp}
+      aria-label="Scroll Up"
       className={`${s.scrollUpBtn} ${visible ? s.visible : ""}`}
     >
       <BiSolidChevronsUp size={34} />

@@ -152,6 +152,7 @@ const CamperList = () => {
                 <ul className={s.iconContainerWrap}>{renderIcons(camper)}</ul>
                 <button
                   type="button"
+                  aria-label="Show more"
                   className={s.camperListBtn}
                   onClick={() => handleClick(camper)}
                 >
@@ -167,6 +168,7 @@ const CamperList = () => {
               className={s.loadMoreBtn}
               onClick={loadMoreItems}
               disabled={isLoading}
+              aria-label="Load More"
             >
               {isLoading ? "Loading..." : "Load More"}
             </button>

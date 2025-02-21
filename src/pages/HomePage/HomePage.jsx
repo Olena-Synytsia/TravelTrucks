@@ -16,7 +16,12 @@ export const HomePage = () => {
           <p className={s.text}>
             You can find everything you want in our catalog
           </p>
-          <button type="button" className={s.homePageBtn} onClick={handleClick}>
+          <button
+            type="button"
+            className={s.homePageBtn}
+            onClick={handleClick}
+            aria-label="View Now"
+          >
             View Now
           </button>
         </div>

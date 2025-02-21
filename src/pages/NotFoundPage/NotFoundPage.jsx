@@ -15,7 +15,7 @@ const NotFoundPage = () => {
         <img src="/img/notfound.png" alt="404 Not Found" width={900} />
         <div className={s.box}>
           <div className={s.text}>Not Found</div>
-          <Link to={linkGoBack} className={s.link_back}>
+          <Link to={linkGoBack} className={s.link_back} aria-label="Go back">
             Go back
           </Link>
         </div>

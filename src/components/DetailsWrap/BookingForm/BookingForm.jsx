@@ -105,7 +105,7 @@ const BookingForm = () => {
               </li>
             </ul>
 
-            <button type="submit" className={s.btn}>
+            <button type="submit" className={s.btn} aria-label="Send">
               Send
             </button>
             <ToastContainer />

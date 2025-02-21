@@ -43,6 +43,7 @@ const DetailsWrap = () => {
       <CamperCard camperId={id} onLoad={handleCamperCardLoad} />
       <div className={s.title}>
         <NavLink
+          aria-label="Features"
           to={`/catalog/${id}/features`}
           className={({ isActive }) =>
             `${s.link} ${
@@ -53,6 +54,7 @@ const DetailsWrap = () => {
           Features
         </NavLink>
         <NavLink
+          aria-label="Reviews"
           to={`/catalog/${id}/reviews`}
           className={({ isActive }) =>
             `${s.link} ${

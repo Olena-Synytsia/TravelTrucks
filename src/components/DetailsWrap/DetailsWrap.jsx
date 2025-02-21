@@ -39,7 +39,7 @@ const DetailsWrap = () => {
   }, [error, navigate]);
 
   return (
-    <div className="section">
+    <div className={s.container}>
       <CamperCard camperId={id} onLoad={handleCamperCardLoad} />
       <div className={s.title}>
         <NavLink

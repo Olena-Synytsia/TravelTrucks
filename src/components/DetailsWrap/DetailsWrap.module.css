@@ -1,3 +1,18 @@
+.container {
+  overflow: hidden;
+  opacity: 0;
+  animation: slideIn 2s ease-out forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .title {
   font-size: 20px;
   font-weight: 600;

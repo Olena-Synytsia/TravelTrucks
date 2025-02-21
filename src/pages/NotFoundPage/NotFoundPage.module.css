@@ -4,6 +4,18 @@
   flex-direction: row;
   text-align: center;
   justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  animation: slideIn 2s ease-out forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .box {

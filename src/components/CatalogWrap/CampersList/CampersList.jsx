@@ -20,6 +20,7 @@ import {
 } from "../../../redux/campers/selectors.js";
 import CamperInfo from "../CamperInfo/CamperInfo.jsx";
 import iconsCreateData from "../../iconsCreateData/iconsCreateData.jsx";
+
 import s from "./CampersList.module.css";
 
 const CamperList = () => {
@@ -118,7 +119,15 @@ const CamperList = () => {
     });
   };
 
-  if (error) return <div className={s.error}>Camper not found</div>;
+  if (error)
+    return (
+      <div
+        className={`${s.error} animate__animated 
+      animate__headShake`}
+      >
+        Camper not found
+      </div>
+    );
   const handleFavoriteClick = (id) => {
     dispatch(toggleFavorite(id));
   };
